@@ -3,5 +3,5 @@ class NT:
 		if type(rule) != dict:
 			raise Exception("Error, rule must be a dict")
 		if rule.keys()[0].islower():
-				raise Exception("Error, rule must be A->b")
+				raise Exception("Error, rule must be A->b or A->NT..")
 		self.rule=rule
