@@ -1,0 +1,2 @@
+class ActiveChart(Chart):
+	pass

@@ -1,0 +1,2 @@
+class EarleyParser:
+	pass
