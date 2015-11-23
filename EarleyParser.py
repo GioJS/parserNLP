@@ -1,2 +1,8 @@
 class EarleyParser:
-	pass
+	
+	def predictor():
+
+	def scanner():
+
+	def completer():
+
