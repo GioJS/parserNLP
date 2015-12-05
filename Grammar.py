@@ -11,9 +11,10 @@ class Grammar:
 		with open(file,'r') as f:
 			for line in f:
 				tokens=line.rstrip('\n').split('->')
-				H=tokens[0]
-				P=tokens[1].split(' ')
-				self.add_rule(H,P)
+				H=tokens[0].strip()
+				Ps=tokens[1].split(',')
+				for P in Ps:
+					self.add_rule(H,P.strip())
 
 	def get_rules(self,H):
 		result=[]
@@ -25,7 +26,7 @@ class Grammar:
 	def get_unit_productions(self):
 		result=[]
 		for rule in self.grammar:
-			if len(rule.rule.values()[0])==1:
+			if len(rule.rule.values()[0])==1 and rule.rule.values()[0].islower():
 				result.append(rule)
 		return result
 
