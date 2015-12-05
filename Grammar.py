@@ -16,6 +16,22 @@ class Grammar:
 			if H==rule.rule.keys()[0]:
 				result.append(rule)
 		return result
+
+	def get_unit_productions(self):
+		result=[]
+		for rule in self.grammar:
+			if len(rule.rule.values()[0])==1:
+				result.append(rule)
+		return result
+
+	def get_nonunit_productions(self):
+		result=[]
+		for rule in self.grammar:
+			if len(rule.rule.values()[0])>1:
+				result.append(rule)
+		return result
+
+
 	def NT_number(self):
 		number=0
 		visited=[]
