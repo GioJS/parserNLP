@@ -1,6 +1,5 @@
 from Rule import *
-from NT import *
-from PT import *
+
 class Grammar:
 	def __init__(self):
 		self.grammar=[]
