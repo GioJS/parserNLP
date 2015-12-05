@@ -1,3 +1,4 @@
+from string import punctuation
 class Rule:
 	def __init__(self,H,P):
 		self.rule={H:P}
@@ -13,3 +14,8 @@ class Rule:
 
 	def count(self):
 		return self.production().count(' ')
+
+	def is_preterminal(self):
+		if self.count()==0 and self.production().islower():
+			return True
+		return  self.count()==0 and (self.production().isdigit()  or (1  in [c in self.production() for c in punctuation]))

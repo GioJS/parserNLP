@@ -26,14 +26,14 @@ class Grammar:
 	def get_unit_productions(self):
 		result=[]
 		for rule in self.grammar:
-			if rule.count()==0 and rule.production().islower():
+			if rule.is_preterminal():
 				result.append(rule)
 		return result
 
 	def get_nonunit_productions(self):
 		result=[]
 		for rule in self.grammar:
-			if rule.count()>=1:
+			if not rule.is_preterminal():
 				result.append(rule)
 		return result
 
