@@ -33,7 +33,7 @@ class Grammar:
 	def get_nonunit_productions(self):
 		result=[]
 		for rule in self.grammar:
-			if rule.count()>1:
+			if rule.count()>=1:
 				result.append(rule)
 		return result
 
