@@ -1,9 +1,8 @@
 from Rule import *
 
 class Grammar:
-	def __init__(self,binary=False):
+	def __init__(self):
 		self.grammar=[]
-		self.binary=binary
 
 	def add_rule(self,H,P):
 		self.grammar.append(Rule(H,P))
@@ -13,13 +12,8 @@ class Grammar:
 			for line in f:
 				tokens=line.rstrip('\n').split('->')
 				H=tokens[0].strip()
-				if not self.binary:
-					Ps=tokens[1].split(',')
-					for P in Ps:
-						self.add_rule(H,P.strip())
-				else:
-					Ps=tokens[1].strip()
-					self.add_rule(H,Ps)
+				P=tokens[1].strip()
+				self.add_rule(H,P)
 
 	def get_rules(self,H):
 		result=[]
