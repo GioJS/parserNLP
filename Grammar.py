@@ -15,7 +15,7 @@ class Grammar:
 			for line in f:
 				tokens=line.rstrip('\n').split('->')
 				H=tokens[0]
-				P="".join(tokens[1]).split(' ')
+				P=tokens[1].split(' ')
 				self.add_rule(H,P)
 
 	def get_rules(self,H):
