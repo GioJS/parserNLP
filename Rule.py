@@ -1,2 +1,3 @@
 class Rule:
-	pass
+	def __init__(self,H,P):
+		self.rule={H:P}
