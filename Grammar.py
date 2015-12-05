@@ -19,21 +19,21 @@ class Grammar:
 	def get_rules(self,H):
 		result=[]
 		for rule in self.grammar:
-			if H==rule.rule.keys()[0]:
+			if H==rule.head():
 				result.append(rule)
 		return result
 
 	def get_unit_productions(self):
 		result=[]
 		for rule in self.grammar:
-			if len(rule.rule.values()[0])==1 and rule.rule.values()[0].islower():
+			if rule.count()==0 and rule.production().islower():
 				result.append(rule)
 		return result
 
 	def get_nonunit_productions(self):
 		result=[]
 		for rule in self.grammar:
-			if len(rule.rule.values()[0])>1:
+			if rule.count()>1:
 				result.append(rule)
 		return result
 
@@ -42,7 +42,7 @@ class Grammar:
 		number=0
 		visited=[]
 		for rule in self.grammar:
-			if not rule.rule.keys()[0] in visited:
+			if not rule.head() in visited:
 				number+=1
-				visited.append(rule.rule.keys()[0])
+				visited.append(rule.head())
 		return number
