@@ -15,10 +15,11 @@ class Grammar:
 				H=tokens[0].strip()
 				if not self.binary:
 					Ps=tokens[1].split(',')
+					for P in Ps:
+						self.add_rule(H,P.strip())
 				else:
-					Ps=tokens[1]
-				for P in Ps:
-					self.add_rule(H,P.strip())
+					Ps=tokens[1].strip()
+					self.add_rule(H,Ps)
 
 	def get_rules(self,H):
 		result=[]
