@@ -3,11 +3,20 @@ from Rule import *
 class Grammar:
 	def __init__(self):
 		self.grammar=[]
+
 	def add_rule(self,rule):
 		self.grammar.append(rule)
 
 	def add_rule(self,H,P):
 		self.grammar.append(Rule(H,P))
+
+	def add_rules_from_file(self,file):
+		with open(file,'r') as f:
+			for line in f:
+				tokens=line.rstrip('\n').split('->')
+				H=tokens[0]
+				P="".join(tokens[1:]).split(' ')
+				self.add_rule(H,P)
 
 	def get_rules(self,H):
 		result=[]
