@@ -18,4 +18,4 @@ class Rule:
 	def is_preterminal(self):
 		if self.count()==0 and self.production().islower():
 			return True
-		return  self.count()==0 and (self.production().isdigit()  or (1  in [c in self.production() and c.islower() for c in punctuation]))
+		return  self.count()==0 and (self.production().isdigit()  or (1  in [c in self.production() for c in punctuation]))
