@@ -32,8 +32,8 @@ class CYK:
                         self.P[0][i][rule.index]=True
                         
             for i in range(1,self.n):
-                for j in range(i-1,0,-1):
-                    for k in range(j+1,i):
+                for j in range(i,-1,-1):
+                    for k in range(j,i):
                         for rule in self.G.get_nonunit_productions():
                             print rule
                             B,C=rule.production().split(' ')
