@@ -7,3 +7,6 @@ class CYK:
 		r=self.G.NT_number()
 		n=len(self.s)
 		self.P=[[[False]*n]*n]*r
+        
+        def parse(self):
+            pass
