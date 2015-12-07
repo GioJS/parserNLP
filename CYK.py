@@ -9,4 +9,6 @@ class CYK:
 		self.P=[[[False]*n]*n]*r
         
         def parse(self):
-            pass
+            preprop = reduce(lambda a,b: a.replace(b, ' '+b), punctuation, self.s)
+            tokens=preprop.split(' ')
+            return tokens
