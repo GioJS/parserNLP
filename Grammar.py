@@ -3,11 +3,18 @@ from Rule import *
 class Grammar:
 	def __init__(self, S):
 		self.grammar=[]
+		self.index=0
+		self.groups={}
                 self.S=S
         
 	def add_rule(self,H,P):
-		self.grammar.append(Rule(H,P,len(self.grammar)))
-
+		self.grammar.append(Rule(H,P,self.index))
+		if H in self.groups:
+                    self.groups[H].append(self.index)
+                else:
+                    self.groups[H]=[]
+                    self.groups[H].append(self.index)
+                self.index+=1
 	def add_rules_from_file(self,file):
 		with open(file,'r') as f:
 			for line in f:
@@ -20,11 +27,7 @@ class Grammar:
             return self.get_rules(self.S)
 
 	def get_rules(self,H):
-		result=[]
-		for rule in self.grammar:
-			if H==rule.head():
-				result.append(rule)
-		return result
+		return self.groups[H]
 
 	def get_unit_productions(self):
 		result=[]

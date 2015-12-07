@@ -30,5 +30,21 @@ class CYK:
                     if rule.production() == self.tokens[i]:
                         print i,rule,rule.index
                         self.P[0][i][rule.index]=True
-                
+                        
+            for i in range(1,self.n):
+                for j in range(0,self.n-i+1):
+                    for k in range(0,i):
+                        for rule in self.G.get_nonunit_productions():
+                            print rule
+                            B,C=rule.production().split(' ')
+                            rule_B=self.G.get_rules(B)
+                            rule_C=self.G.get_rules(C)
+                           # print rule_B, rule_C
+                            for b in rule_B:
+                                for c in rule_C:
+                                    if self.P[k][j][b] and self.P[i-k][j+k][c]:
+                                        print i,j,k,b,c
+                                        print rule,",",B,",",C
+                                        self.P[i][j][rule.index]=True
+                                    
             #return tokens
