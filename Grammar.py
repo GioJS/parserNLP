@@ -22,9 +22,8 @@ class Grammar:
 				H=tokens[0].strip()
 				P=tokens[1].strip()
 				self.add_rule(H,P)
-
-        def get_start_rules(self):
-            return self.get_rules(self.S)
+	def get_start_rules(self):
+			return self.get_rules(self.S)
 
 	def get_rules(self,H):
 		return self.groups[H]

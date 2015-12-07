@@ -32,8 +32,8 @@ class CYK:
                         self.P[0][i][rule.index]=True
                         
             for i in range(1,self.n):
-                for j in range(0,self.n-i+1):
-                    for k in range(0,i):
+                for j in range(i-1,0,-1):
+                    for k in range(j+1,i):
                         for rule in self.G.get_nonunit_productions():
                             print rule
                             B,C=rule.production().split(' ')
@@ -42,7 +42,7 @@ class CYK:
                            # print rule_B, rule_C
                             for b in rule_B:
                                 for c in rule_C:
-                                    if self.P[k][j][b] and self.P[i-k][j+k][c]:
+                                    if self.P[i][k][b] and self.P[k][j][c]:
                                         print i,j,k,b,c
                                         print rule,",",B,",",C
                                         self.P[i][j][rule.index]=True
