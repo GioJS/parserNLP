@@ -1,9 +1,10 @@
 from Rule import *
 
 class Grammar:
-	def __init__(self):
+	def __init__(self, S):
 		self.grammar=[]
-
+                self.S=S
+        
 	def add_rule(self,H,P):
 		self.grammar.append(Rule(H,P,len(self.grammar)))
 
@@ -14,6 +15,9 @@ class Grammar:
 				H=tokens[0].strip()
 				P=tokens[1].strip()
 				self.add_rule(H,P)
+
+        def get_start_rules(self):
+            return self.get_rules(self.S)
 
 	def get_rules(self,H):
 		result=[]

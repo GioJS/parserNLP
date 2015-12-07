@@ -12,9 +12,7 @@ class CYK:
 		self.n=len(self.tokens)
 		self.P=[[[False]*self.r]*self.n]*self.n
         '''
-        for each i = 1 to n
-            for each unit production Rj -> ai
-                set P[1,i,j] = true
+       
         for each i = 2 to n -- Length of span
             for each j = 1 to n-i+1 -- Start of span
                 for each k = 1 to i-1 -- Partition of span
