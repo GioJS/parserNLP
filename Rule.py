@@ -1,6 +1,7 @@
 from string import punctuation
 class Rule:
-	def __init__(self,H,P):
+	def __init__(self,H,P,index):
+	        self.index=index
 		self.rule={H:P}
 
 	def __repr__(self):

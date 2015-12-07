@@ -5,7 +5,7 @@ class Grammar:
 		self.grammar=[]
 
 	def add_rule(self,H,P):
-		self.grammar.append(Rule(H,P))
+		self.grammar.append(Rule(H,P,len(self.grammar)))
 
 	def add_rules_from_file(self,file):
 		with open(file,'r') as f:
@@ -36,6 +36,9 @@ class Grammar:
 				result.append(rule)
 		return result
 
+       
+        def size(self):
+            return len(self.grammar)
 
 	def NT_number(self):
 		number=0
