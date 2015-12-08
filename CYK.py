@@ -22,7 +22,7 @@ class CYK:
             #for j=i-2 to 0 -> j=i-1 to 0
             for j in range(i-1,-1,-1):
                 #for k=j+1 to i-1
-                for k in range(j+1,i):
+                for k in range(j+1,i-1):
                     #print "i: %d,j: %d,k: %d" % (i,j,k)
                     for rule in self.G.get_nonunit_productions():
                         #print rule
