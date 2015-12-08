@@ -45,9 +45,9 @@ class CYK:
         while len(R)>0:
             r=R.pop()
             if self.P[self.n-1][0][r]:
-                print self.G.grammar[r]
+                print self.G[r]
                 #print self.G.grammar[r]
-                L=self.G.grammar[r].production().split(' ')
+                L=self.G[r].production().split(' ')
                 if len(L)==2:
                     R+=self.G.get_rules(L[0])
                     R+=self.G.get_rules(L[1])
@@ -55,8 +55,8 @@ class CYK:
     def get_derivations(self):
         for i in self.G.get_start_rules():
             if self.P[self.n-1][0][i]:
-                print self.G.grammar[i]
-                L=self.G.grammar[i].production().split(' ')
+                print self.G[i]
+                L=self.G[i].production().split(' ')
                 if len(L)==2:
                     self.derivation(L[0])
                     self.derivation(L[1])

@@ -6,7 +6,10 @@ class Grammar:
 		self.index=0
 		self.groups={}
 		self.S=S
-        
+
+	def __getitem__(self,index):
+		return self.grammar[index]
+
 	def add_rule(self,H,P):
 		self.grammar.append(Rule(H,P,self.index))
 		if H in self.groups:
