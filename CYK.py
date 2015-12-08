@@ -52,7 +52,7 @@ class CYK:
                     R+=self.G.get_rules(self.G[r][0])
                     R+=self.G.get_rules(self.G[r][1])
 
-    def get_derivations(self):
+    def derivations(self):
         for i in self.G.get_start_rules():
             if self.P[self.n-1][0][i]:
                 print self.G[i]
