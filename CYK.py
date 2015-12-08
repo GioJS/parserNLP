@@ -22,8 +22,7 @@ class CYK:
             #for j=i-2 to 0 -> j=i-1 to 0
             for j in range(i-1,-1,-1):
                 #for k=j+1 to i-1
-                for k in range(j+1,i-1):
-                    #print "i: %d,j: %d,k: %d" % (i,j,k)
+                for k in range(j,i):
                     for rule in self.G.get_nonunit_productions():
                         #print rule
                         B=rule[0]
@@ -34,11 +33,6 @@ class CYK:
                         for b in rule_B:
                             for c in rule_C:
                                 if self.P[i-1][k][b] and self.P[k][j][c]:
-                                    #print rule
-                                    #print self.G.grammar[b]
-                                    #print self.G.grammar[c]
-                                    #print i,j,k,b,c
-                                    #print rule,",",B,",",C
                                     self.P[i-1][j][rule.index]=True
     def derivation(self,H):
         R=self.G.get_rules(H)
@@ -46,7 +40,7 @@ class CYK:
         while len(R)>0:
             r=R.pop()
             if self.P[self.n-1][0][r]:
-                print self.G[r]
+                print H,":",self.G[r]
                 #print self.G.grammar[r]
                 #L=self.G[r].production().split(' ')
                 if self.G[r].count()==1:
@@ -58,7 +52,6 @@ class CYK:
             if self.P[self.n-1][0][i]:
                 print self.G[i]
                 #L=self.G[i].production().split(' ')
-                
                 if self.G[i].count()==1:
                     self.derivation(self.G[i][0])
                     self.derivation(self.G[i][1])
