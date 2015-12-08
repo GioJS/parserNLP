@@ -16,14 +16,14 @@ class CYK:
                 if rule.production() == self.tokens[i]:
                     #print i,rule,rule.index
                     self.P[0][i][rule.index]=True
-        print "non terminals [ok]"
+        #print "non terminals [ok]"
         #for i=1 to n -> i=0 to n-1
         for i in range(1,self.n+1):
             #for j=i-2 to 0 -> j=i-1 to 0
             for j in range(i-1,-1,-1):
                 #for k=j+1 to i-1
                 for k in range(j+1,i):
-                    print "i: %d,j: %d,k: %d" % (i,j,k)
+                    #print "i: %d,j: %d,k: %d" % (i,j,k)
                     for rule in self.G.get_nonunit_productions():
                         #print rule
                         B,C=rule.production().split(' ')
@@ -33,9 +33,30 @@ class CYK:
                         for b in rule_B:
                             for c in rule_C:
                                 if self.P[i-1][k][b] and self.P[k][j][c]:
-                                    print rule
-                                    print self.G.grammar[b]
-                                    print self.G.grammar[c]
+                                    #print rule
+                                    #print self.G.grammar[b]
+                                    #print self.G.grammar[c]
                                     #print i,j,k,b,c
                                     #print rule,",",B,",",C
                                     self.P[i-1][j][rule.index]=True
+    def derivation(self,H):
+        R=self.G.get_rules(H)
+        #print H
+        while len(R)>0:
+            r=R.pop()
+            if self.P[self.n-1][0][r]:
+                print self.G.grammar[r]
+                #print self.G.grammar[r]
+                L=self.G.grammar[r].production().split(' ')
+                if len(L)==2:
+                    R+=self.G.get_rules(L[0])
+                    R+=self.G.get_rules(L[1])
+
+    def get_derivations(self):
+        for i in self.G.get_start_rules():
+            if self.P[self.n-1][0][i]:
+                print self.G.grammar[i]
+                L=self.G.grammar[i].production().split(' ')
+                if len(L)==2:
+                    self.derivation(L[0])
+                    self.derivation(L[1])
