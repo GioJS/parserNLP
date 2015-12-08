@@ -17,9 +17,12 @@ class CYK:
                     #print i,rule,rule.index
                     self.P[0][i][rule.index]=True
         print "non terminals [ok]"
+        #for i=1 to n -> i=0 to n-1
         for i in range(1,self.n):
-            for j in range(i,-1,-1):
-                for k in range(j,i):
+            #for j=i-2 to 0 -> j=i-1 to 0
+            for j in range(i-1,-1,-1):
+                #for k=j+1 to i-1
+                for k in range(j+1,i):
                     print "i: %d,j: %d,k: %d" % (i,j,k)
                     for rule in self.G.get_nonunit_productions():
                         #print rule
