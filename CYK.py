@@ -26,7 +26,8 @@ class CYK:
                     #print "i: %d,j: %d,k: %d" % (i,j,k)
                     for rule in self.G.get_nonunit_productions():
                         #print rule
-                        B,C=rule.production().split(' ')
+                        B=rule[0]
+                        C=rule[1]
                         rule_B=self.G.get_rules(B)
                         rule_C=self.G.get_rules(C)
                         # print rule_B, rule_C
