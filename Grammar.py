@@ -41,10 +41,8 @@ class Grammar:
 			if not rule.is_preterminal():
 				result.append(rule)
 		return result
-
-       
-        def size(self):
-            return len(self.grammar)
+	def size(self):
+		return len(self.grammar)
 
 	def NT_number(self):
 		number=0
