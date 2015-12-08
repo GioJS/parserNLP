@@ -5,7 +5,7 @@ class Grammar:
 		self.grammar=[]
 		self.index=0
 		self.groups={}
-                self.S=S
+		self.S=S
         
 	def add_rule(self,H,P):
 		self.grammar.append(Rule(H,P,self.index))
