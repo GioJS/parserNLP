@@ -17,7 +17,7 @@ class CYK:
                     #print i,rule,rule.index
                     self.P[0][i][rule.index]=True
         #print "non terminals [ok]"
-        #for i=1 to n -> i=0 to n-1
+        #for i=1 to n -> i=1 to n+1
         for i in range(1,self.n+1):
             #for j=i-2 to 0 -> j=i-1 to 0
             for j in range(i-1,-1,-1):
@@ -49,7 +49,7 @@ class CYK:
                 print self.G[r]
                 #print self.G.grammar[r]
                 #L=self.G[r].production().split(' ')
-                if self.G[r].count()==2:
+                if self.G[r].count()==1:
                     R+=self.G.get_rules(self.G[r][0])
                     R+=self.G.get_rules(self.G[r][1])
 
@@ -58,6 +58,7 @@ class CYK:
             if self.P[self.n-1][0][i]:
                 print self.G[i]
                 #L=self.G[i].production().split(' ')
-                if self.G[i].count()==2:
+                
+                if self.G[i].count()==1:
                     self.derivation(self.G[i][0])
                     self.derivation(self.G[i][1])
