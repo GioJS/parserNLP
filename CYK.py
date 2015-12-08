@@ -18,7 +18,7 @@ class CYK:
                     self.P[0][i][rule.index]=True
         print "non terminals [ok]"
         #for i=1 to n -> i=0 to n-1
-        for i in range(1,self.n):
+        for i in range(1,self.n+1):
             #for j=i-2 to 0 -> j=i-1 to 0
             for j in range(i-1,-1,-1):
                 #for k=j+1 to i-1
@@ -32,10 +32,10 @@ class CYK:
                         # print rule_B, rule_C
                         for b in rule_B:
                             for c in rule_C:
-                                if self.P[i][k][b] and self.P[k][j][c]:
+                                if self.P[i-1][k][b] and self.P[k][j][c]:
                                     print rule
                                     print self.G.grammar[b]
                                     print self.G.grammar[c]
                                     #print i,j,k,b,c
                                     #print rule,",",B,",",C
-                                    self.P[i][j][rule.index]=True
+                                    self.P[i-1][j][rule.index]=True
