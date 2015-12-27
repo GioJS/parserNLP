@@ -1,12 +1,25 @@
+'''
+Classe che rappresenta una grammatica probabilistica
+autori: Giordano Cristini, Caterina Masotti
+'''
+
 from Grammar import *
 from StochasticDict import *
 import random
+
 class StochasticGrammar(Grammar):
+
 	def __init__(self,S):
+		'''
+		Costruttore
+		'''
 		Grammar.__init__(self,S)
 		self.grammar_chances={}
 
 	def init_chances(self):
+		'''
+			Assegna per ogni gruppo di produzioni, le probabilita' ad ogni regola del gruppo
+		'''
 		for group in self.groups:
 			chances={}
 			if len(self.groups[group])==1:

@@ -1,7 +1,15 @@
+'''
+Classe che implementa il parser CYK
+autori: Giordano Cristini, Caterina Masotti
+'''
+
 from Grammar import *
 
 class CYK:
     def __init__(self,G,s):
+        '''
+        Costruttore, prende in input la grammatica G, e la stringa da parsare s
+        '''
         self.s=s
         self.G=G
         self.r=self.G.size()
@@ -11,6 +19,9 @@ class CYK:
         self.P=[[[False]*self.r]*self.n]*self.n
 
     def parse(self):
+        '''
+        Metodo che implementa il parser CYK
+        '''
         for i in range(self.n):
             for rule in self.G.get_unit_productions():
                 if rule.production() == self.tokens[i]:
@@ -35,6 +46,9 @@ class CYK:
                                 if self.P[i-1][k][b] and self.P[k][j][c]:
                                     self.P[i-1][j][rule.index]=True
     def derivation(self,H):
+        '''
+        Visualizza la derivazione di una data testa di produzione H
+        '''
         R=self.G.get_rules(H)
         #print H
         while len(R)>0:
@@ -48,6 +62,9 @@ class CYK:
                     R+=self.G.get_rules(self.G[r][1])
 
     def derivations(self):
+        '''
+        Partendo dalla start symbol, visualizza ogni sua derivazione
+        '''
         for i in self.G.get_start_rules():
             if self.P[self.n-1][0][i]:
                 print self.G[i]
