@@ -40,9 +40,7 @@ class Rule:
 		Fornisce la produzione
 		'''
 		return self.rule.values()[0]
-	'''
-	Conta il numero di simboli che vengono prodotti
-	'''
+	
 	def count(self):
 		'''
 		Conta il numero di simboli che vengono prodotti
