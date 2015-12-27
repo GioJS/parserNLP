@@ -4,14 +4,13 @@ autori: Giordano Cristini, Caterina Masotti
 '''
 
 from Grammar import *
-from StochasticDict import *
 import random
 
 class StochasticGrammar(Grammar):
 
 	def __init__(self,S):
 		'''
-		Costruttore
+		Costruttore, prende in input lo start symbol
 		'''
 		Grammar.__init__(self,S)
 		self.grammar_chances={}
