@@ -12,8 +12,9 @@ class StochasticGrammar(Grammar):
 			if len(self.groups[group])==1:
 				chances[self.groups[group][0]]=1.0
 				self.grammar_chances[group]=chances
-				print self.grammar[self.groups[group][0]], 1.0
+				#print self.grammar[self.groups[group][0]], 1.0
 			else:
+
 				for rule in self.groups[group]:
 					#while True:
 					#	try:
@@ -21,7 +22,7 @@ class StochasticGrammar(Grammar):
 							#break
 					#	except Exception as e:
 					#		pass
-					print self.grammar[rule], chances[rule]
+					#print self.grammar[rule], chances[rule]
 					self.grammar_chances[group]=chances
 
 
