@@ -10,6 +10,6 @@
 from StochasticGrammar import *
 
 G=StochasticGrammar('S')
-G.add_rules_from_file('gramm_test')
+G.add_rules_from_file('BigGrammar')
 G.init_chances()
 print G.grammar_chances
