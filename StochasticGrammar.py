@@ -18,11 +18,13 @@ class StochasticGrammar(Grammar):
 				for rule in self.groups[group]:
 					#while True:
 					#	try:
-					chances[rule]=random.random()
+					chances[rule]=random.uniform(0,1)
 							#break
 					#	except Exception as e:
 					#		pass
 					#print self.grammar[rule], chances[rule]
-					self.grammar_chances[group]=chances
+				print chances
+				chances.normalize()
+				self.grammar_chances[group]=chances
 
 
