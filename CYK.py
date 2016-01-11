@@ -17,6 +17,7 @@ class CYK:
         self.tokens=preprop.split(' ')  
         self.n=len(self.tokens)
         self.P=[[[False]*self.r]*self.n]*self.n
+        self.D=[[[[]]*self.r]*self.n]*self.n
 
     def parse(self):
         '''
@@ -27,6 +28,7 @@ class CYK:
                 if rule.production() == self.tokens[i]:
                     #print i,rule,rule.index
                     self.P[0][i][rule.index]=True
+                    self.D[0][i][rule.index].append(rule.index)
         #print "non terminals [ok]"
         #for i=1 to n -> i=1 to n+1
         for i in range(1,self.n+1):
@@ -45,6 +47,7 @@ class CYK:
                             for c in rule_C:
                                 if self.P[i-1][k][b] and self.P[k][j][c]:
                                     self.P[i-1][j][rule.index]=True
+                                    self.D[i-1][j][rule.index].append(rule.index)
     def derivation(self,H):
         '''
         Visualizza la derivazione di una data testa di produzione H
