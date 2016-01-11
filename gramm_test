@@ -1,8 +1,12 @@
-S -> N VP
-VN -> N N
-VP -> V N
-N -> students
-N -> jeff
-N -> geometry
-N -> trains
-V -> trains
+S -> NP VP
+PP -> P NP
+VP -> V NP
+VP -> VP PP
+P -> with
+V -> saw
+NP -> NP PP
+NP -> astronomers
+NP -> ears
+NP -> saw
+NP -> stars
+NP -> telescopes

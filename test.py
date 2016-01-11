@@ -2,10 +2,10 @@ from CYK import *
 G=Grammar('S')
 G.add_rules_from_file('gramm_test')
 #print G.get_unit_productions()
-s='jeff trains geometry students'
+s='astronomers saw stars'
 parser=CYK(G,s)
 parser.parse()
-#print G.get_start_rules()
+parser.derivations()
 print parser.D
 # from StochasticGrammar import *
 

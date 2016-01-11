@@ -5,6 +5,7 @@ autori: Giordano Cristini, Caterina Masotti
 
 from Grammar import *
 
+
 class CYK:
     def __init__(self,G,s):
         '''
@@ -31,11 +32,11 @@ class CYK:
                     self.D[0][i][rule.index].append(rule.index)
         #print "non terminals [ok]"
         #for i=1 to n -> i=1 to n+1
-        for i in range(1,self.n+1):
+        for i in range(1,self.n):
             #for j=i-2 to 0 -> j=i-1 to 0
-            for j in range(i-1,-1,-1):
+            for j in range(0,self.n-i+1):
                 #for k=j+1 to i-1
-                for k in range(j,i):
+                for k in range(0,i-1):
                     for rule in self.G.get_nonunit_productions():
                         #print rule
                         B=rule[0]
@@ -45,9 +46,10 @@ class CYK:
                         # print rule_B, rule_C
                         for b in rule_B:
                             for c in rule_C:
-                                if self.P[i-1][k][b] and self.P[k][j][c]:
-                                    self.P[i-1][j][rule.index]=True
-                                    self.D[i-1][j][rule.index].append(rule.index)
+                                if self.P[k][j][b] and self.P[i-k][j+k][c]:
+                                    self.P[i][j][rule.index]=True
+                                    if not rule.index in self.D[i][j][rule.index]:
+                                        self.D[i][j][rule.index].append(rule.index)
     def derivation(self,H):
         '''
         Visualizza la derivazione di una data testa di produzione H
