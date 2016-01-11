@@ -2,7 +2,7 @@ from CYK import *
 G=Grammar('S')
 G.add_rules_from_file('gramm_test')
 #print G.get_unit_productions()
-s='astronomers saw stars'
+s='she eats a fish with a fork'
 parser=CYK(G,s)
 parser.parse()
 parser.derivations()

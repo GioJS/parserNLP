@@ -1,12 +1,12 @@
 S -> NP VP
-PP -> P NP
-VP -> V NP
 VP -> VP PP
+VP -> V NP
+VP -> eats
+PP -> P NP
+NP -> DET N
+NP -> she
+V -> eats
 P -> with
-V -> saw
-NP -> NP PP
-NP -> astronomers
-NP -> ears
-NP -> saw
-NP -> stars
-NP -> telescopes
+N -> fish
+N -> fork
+DET -> a
