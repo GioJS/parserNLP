@@ -63,26 +63,32 @@ class CYK:
         Visualizza la derivazione di una data testa di produzione H
         '''
         R=self.G.get_rules(H)
+        d=''
         #print H
         while len(R)>0:
             r=R.pop()
             #print self.D[self.n-1][0][r]
             if self.P[self.n-1][0][r]:
-                print H,":",self.G[r]
+                #print H,":",self.G[r]
+                d+=str(self.G[r])+'\n'
                 #print self.G.grammar[r]
                 #L=self.G[r].production().split(' ')
                 if self.G[r].count()==1:
                     R+=self.G.get_rules(self.G[r][0])
                     R+=self.G.get_rules(self.G[r][1])
+        return d+'\n'
 
     def derivations(self):
         '''
         Partendo dalla start symbol, visualizza ogni sua derivazione
         '''
+        d=''
         for i in self.G.get_start_rules():
             if self.P[self.n-1][0][i]:
-                print self.G[i]
+                #print self.G[i]
+                d+=str(self.G[i])+'\n'
                 #L=self.G[i].production().split(' ')
                 if self.G[i].count()==1:
-                    self.derivation(self.G[i][0])
-                    self.derivation(self.G[i][1])
+                    d+=self.derivation(self.G[i][0])
+                    d+=self.derivation(self.G[i][1])
+        return d
