@@ -5,9 +5,6 @@ autori: Giordano Cristini, Caterina Masotti
 
 from Grammar import *
 
-def create(n, constructor=list):
-        for _ in xrange(n):
-            yield constructor()
 class CYK:
     
     def __init__(self,G,s):
@@ -39,8 +36,8 @@ class CYK:
             for rule in self.G.get_unit_productions():
                 if rule.production() == self.tokens[i]:
                     #print i,rule,rule.index
-                    self.P[i][i][rule.index]=True
-                    self.D[i][i][rule.index].append(rule.index)
+                    self.P[0][i][rule.index]=True
+                    self.D[0][i][rule.index].append(rule.index)
         #print "non terminals [ok]"
         #for i=1 to n -> i=1 to n+1
         for i in range(1,self.n):
@@ -57,10 +54,10 @@ class CYK:
                         # print rule_B, rule_C
                         for b in rule_B:
                             for c in rule_C:
-                                if len(self.D[k][j][b])>0 and len(self.D[i-k][j+k][c])>0:
+                                if self.P[k][j][b] and self.P[i-k][j+k][c]:
                                     self.P[i][j][rule.index]=True
-                                    #if not rule.index in self.D[i][j][rule.index]:
-                                    self.D[i][j][rule.index].append(rule.index)
+                                    if not rule.index in self.D[i][j][rule.index]:
+                                        self.D[i][j][rule.index].append(rule.index)
     def derivation(self,H):
         '''
         Visualizza la derivazione di una data testa di produzione H
@@ -70,7 +67,7 @@ class CYK:
         while len(R)>0:
             r=R.pop()
             #print self.D[self.n-1][0][r]
-            if len(self.D[self.n-1][0][r])>0:
+            if self.P[self.n-1][0][r]:
                 print H,":",self.G[r]
                 #print self.G.grammar[r]
                 #L=self.G[r].production().split(' ')
@@ -83,7 +80,7 @@ class CYK:
         Partendo dalla start symbol, visualizza ogni sua derivazione
         '''
         for i in self.G.get_start_rules():
-            if len(self.D[self.n-1][0][i])>0:
+            if self.P[self.n-1][0][i]:
                 print self.G[i]
                 #L=self.G[i].production().split(' ')
                 if self.G[i].count()==1:
