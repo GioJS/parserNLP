@@ -4,7 +4,12 @@ autori: Giordano Cristini, Caterina Masotti
 '''
 
 from Grammar import *
-
+class Node:
+    def __init__(self,rule,parent):
+        self.rule=rule
+        self.parent=parent
+    def __repr__(self):
+        return (str(self.parent) if self.parent!=None else '-')+' |=> '+str(self.rule)
 class CYK:
     
     def __init__(self,G,s):
@@ -18,14 +23,13 @@ class CYK:
         self.tokens=preprop.split(' ')  
         self.n=len(self.tokens)
         self.P=[[[False]*self.r]*self.n]*self.n
-        #self.D=[[list(create(self.r))]*self.n]*self.n
         self.D=[]
         for i in range(self.n):
             self.D.append(list())
             for j in range(self.n):
                 self.D[i].append(list())
-                for k in range(self.r):
-                    self.D[i][j].append(list())
+                # for k in range(self.r):
+                #     self.D[i][j].append(list())
        # print self.D
 
     def parse(self):
@@ -37,7 +41,7 @@ class CYK:
                 if rule.production() == self.tokens[i]:
                     #print i,rule,rule.index
                     self.P[0][i][rule.index]=True
-                    self.D[0][i][rule.index].append(rule.index)
+                    self.D[0][i].append(Node(self.G[rule.index],None))
         #print "non terminals [ok]"
         #for i=1 to n -> i=1 to n+1
         for i in range(1,self.n):
@@ -56,8 +60,9 @@ class CYK:
                             for c in rule_C:
                                 if self.P[k][j][b] and self.P[i-k][j+k][c]:
                                     self.P[i][j][rule.index]=True
-                                    if not rule.index in self.D[i][j][rule.index]:
-                                        self.D[i][j][rule.index].append(rule.index)
+                                    self.D[i][j].append(Node(self.G[b],self.G[rule.index]))
+                                    self.D[i][j].append(Node(self.G[c],self.G[rule.index]))
+
     def derivation(self,H):
         '''
         Visualizza la derivazione di una data testa di produzione H
@@ -66,7 +71,9 @@ class CYK:
         d=''
         #print H
         while len(R)>0:
+            #print R
             r=R.pop()
+            #print r
             #print self.D[self.n-1][0][r]
             if self.P[self.n-1][0][r]:
                 #print H,":",self.G[r]
@@ -84,6 +91,7 @@ class CYK:
         '''
         d=''
         for i in self.G.get_start_rules():
+           # print i
             if self.P[self.n-1][0][i]:
                 #print self.G[i]
                 d+=str(self.G[i])+'\n'
