@@ -9,7 +9,17 @@ parser.parse()
 #print parser.derivations()
 #pre-t
 for x in G.get_start_rules():
-	print parser.D[parser.n-1][0][x]
+	P=[]
+	y = parser.D[parser.n-1][0][x]
+	print y
+	P.append(y.l_child)
+	P.append(y.r_child)
+	while len(P)>0:
+		q=P.pop()
+		print q
+		P.append(q.l_child)
+		P.append(q.r_child)
+
 # from StochasticGrammar import *
 
 # G=StochasticGrammar('S')

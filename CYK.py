@@ -68,8 +68,8 @@ class CYK:
                                     self.D[k][j][b].parent=rule
                                     self.D[i-k][j+k][c].parent=rule
                                     self.D[i][j][rule.index].rule=rule
-                                    self.D[i][j][rule.index].l_child=self.G[b]
-                                    self.D[i][j][rule.index].r_child=self.G[c]
+                                    self.D[i][j][rule.index].l_child=self.D[k][j][b]
+                                    self.D[i][j][rule.index].r_child=self.D[i-k][j+k][c]
 
                                     #self.D[i][j][rule.index].rule=rule
 
@@ -85,9 +85,9 @@ class CYK:
             r=R.pop()
             #print r
             #print self.D[self.n-1][0][r]
-            if (self.D[self.n-1][0][r]):
+            if (self.D[self.n-1][0][r]).rule:
                 #print H,":",self.G[r]
-                d+=str(self.D[self.n-1][0][r].rule)+'\n'
+                d+=str(self.D[self.n-1][0][r])+'\n'
                 #print self.G.grammar[r]
                 #L=self.G[r].production().split(' ')
                 if self.G[r].count()==1:
@@ -102,9 +102,9 @@ class CYK:
         d=''
         for i in self.G.get_start_rules():
            # print i
-            if (self.D[self.n-1][0][i]):
+            if (self.D[self.n-1][0][i]).rule:
                 #print self.G[i]
-                d+=str(self.D[self.n-1][0][i].rule)+'\n'
+                d+=str(self.D[self.n-1][0][i])+'\n'
                 #L=self.G[i].production().split(' ')
                 if self.G[i].count()==1:
                     d+=self.derivation(self.G[i][0])
