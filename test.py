@@ -22,7 +22,6 @@ for x in G.get_start_rules():
 			print q
 			P.append(q.l_child)
 			P.append(q.r_child)
-
 # from StochasticGrammar import *
 
 # G=StochasticGrammar('S')
