@@ -8,9 +8,10 @@ parser.parse()
 #print parser.D
 #print parser.derivations()
 #pre-t
+print parser.D
 for x in G.get_start_rules():
 	P=[]
-	y = parser.D[parser.n-1][0][x]
+	y = parser.D[0][1][x]
 	print y
 	P.append(y.l_child)
 	P.append(y.r_child)
