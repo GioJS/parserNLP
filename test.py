@@ -8,10 +8,8 @@ parser.parse()
 #print parser.D
 #print parser.derivations()
 #pre-t
-for i in range(parser.n):
-	for j in range(len(G.grammar)):
-		if parser.D[0][i][j].rule:
-			print parser.D[0][i][j]
+for x in G.get_start_rules():
+	print parser.D[parser.n-1][0][x]
 # from StochasticGrammar import *
 
 # G=StochasticGrammar('S')

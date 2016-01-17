@@ -5,11 +5,13 @@ autori: Giordano Cristini, Caterina Masotti
 
 from Grammar import *
 class Node:
-    def __init__(self,rule,parent):
+    def __init__(self,rule,parent,l_child,r_child):
         self.rule=rule
         self.parent=parent
+        self.l_child=l_child
+        self.r_child=r_child
     def __repr__(self):
-        return (str(self.parent) if self.parent!=None else '-')+' |=> '+str(self.rule)
+        return str(self.rule)+' => '+str(self.l_child)+' & '+str(self.r_child)
 class CYK:
     
     def __init__(self,G,s):
@@ -29,7 +31,7 @@ class CYK:
             for j in range(self.n):
                 self.D[i].append(list())
                 for k in range(self.r):
-                    self.D[i][j].append(Node(None,None))
+                    self.D[i][j].append(Node(None,None,None,None))
        # print self.D
 
     def parse(self):
@@ -66,7 +68,10 @@ class CYK:
                                     self.D[k][j][b].parent=rule
                                     self.D[i-k][j+k][c].parent=rule
                                     self.D[i][j][rule.index].rule=rule
-                                    self.D[i][j][rule.index].rule=rule
+                                    self.D[i][j][rule.index].l_child=self.G[b]
+                                    self.D[i][j][rule.index].r_child=self.G[c]
+
+                                    #self.D[i][j][rule.index].rule=rule
 
     def derivation(self,H):
         '''
