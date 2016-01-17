@@ -11,7 +11,7 @@ class Node:
         self.l_child=l_child
         self.r_child=r_child
     def __repr__(self):
-        return str(self.rule)+' => '+str(self.l_child.rule)+' & '+str(self.r_child.rule)
+        return str(self.rule)+' => '+(str(self.l_child.rule) if self.l_child else '')+' & '+(str(self.r_child.rule) if self.r_child else '')
 class CYK:
     
     def __init__(self,G,s):

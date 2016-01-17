@@ -13,13 +13,15 @@ for x in G.get_start_rules():
 	P=[]
 	y = parser.D[0][1][x]
 	print y
+
 	P.append(y.l_child)
 	P.append(y.r_child)
 	while len(P)>0:
 		q=P.pop()
-		print q
-		P.append(q.l_child)
-		P.append(q.r_child)
+		if q!=None:
+			print q
+			P.append(q.l_child)
+			P.append(q.r_child)
 
 # from StochasticGrammar import *
 
