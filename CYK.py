@@ -77,10 +77,12 @@ class CYK:
                                 print rule
                                 #print self.D[k][j][b]
                                 #print self.D[i-k][j+k][c]
-                                self.D[k][j][b].parent=rule
-                                self.D[i-k][j+k][c].parent=rule
+                                
                                 self.D[i][j][rule.index].rule=rule
                                 self.D[i][j][rule.index].check()
+
+                                self.D[k][j][b].parent=self.D[i][j][rule.index]
+                                self.D[i-k][j+k][c].parent=self.D[i][j][rule.index]
                                 #print rule
                                 #if (self.D[k][j][b].rule and self.D[i-k][j+k][c].rule):
                                 self.D[i][j][rule.index].l_child=self.D[k][j][b]
