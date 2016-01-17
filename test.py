@@ -8,7 +8,7 @@ parser.parse()
 #print parser.D
 #print parser.derivations()
 #pre-t
-print parser.D
+#print parser.D
 for x in G.get_start_rules():
 	P=[]
 	y = parser.D[parser.n-1][0][x]

@@ -60,7 +60,12 @@ class CYK:
                         # print rule_B, rule_C
                         for b in rule_B:
                             for c in rule_C:
-                                if (self.D[k][j][b].rule and self.D[i-k][j+k][c].rule) and (not (self.D[k][j][b].parent) and not (self.D[i-k][j+k][c].parent)):
+                                print '\n'
+                                print self.D[k][j][b].rule
+                                print self.D[i-k][j+k][c].rule
+                                print '\n'
+                                #print (self.D[k][j][b].rule and self.D[i-k][j+k][c].rule)
+                                if  (self.D[k][j][b].rule) and  (self.D[i-k][j+k][c].rule):
                                     #self.P[i][j][rule.index]=True
                                     #print rule
                                     #print self.D[k][j][b]
@@ -68,7 +73,8 @@ class CYK:
                                     self.D[k][j][b].parent=rule
                                     self.D[i-k][j+k][c].parent=rule
                                     self.D[i][j][rule.index].rule=rule
-                                    print rule
+                                    #print rule
+                                    #if (self.D[k][j][b].rule and self.D[i-k][j+k][c].rule):
                                     self.D[i][j][rule.index].l_child=self.D[k][j][b]
                                     self.D[i][j][rule.index].r_child=self.D[i-k][j+k][c]
 
