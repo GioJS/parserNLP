@@ -5,7 +5,7 @@ G.add_rules_from_file('gramm_test')
 s='she eats a fish with a fork'
 parser=CYK(G,s)
 parser.parse()
-print parser.D
+#print parser.D
 #print parser.derivations()
 #pre-t
 for i in range(parser.n):

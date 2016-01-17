@@ -44,11 +44,11 @@ class CYK:
                     self.D[0][i][rule.index].rule=rule
         #print "non terminals [ok]"
         #for i=1 to n -> i=1 to n+1
-        for i in range(1,self.n):
+        for i in range(1,self.n+1):
             #for j=i-2 to 0 -> j=i-1 to 0
-            for j in range(0,self.n-i+1):
+            for j in range(0,self.n-i):
                 #for k=j+1 to i-1
-                for k in range(0,i-1):
+                for k in range(0,i+1):
                     for rule in self.G.get_nonunit_productions():
                         #print rule
                         B=rule[0]
@@ -60,6 +60,9 @@ class CYK:
                             for c in rule_C:
                                 if not (self.D[k][j][b].parent) and not (self.D[i-k][j+k][c].parent):
                                     #self.P[i][j][rule.index]=True
+                                    #print rule
+                                    #print self.D[k][j][b]
+                                    #print self.D[i-k][j+k][c]
                                     self.D[k][j][b].parent=rule
                                     self.D[i-k][j+k][c].parent=rule
                                     self.D[i][j][rule.index].rule=rule
