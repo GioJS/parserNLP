@@ -10,6 +10,9 @@ class Node:
         self.parent=parent
         self.l_child=l_child
         self.r_child=r_child
+        '''
+        flag di visita
+        '''
         self.flag=False
     def __repr__(self):
         return str(self.rule)+' => '+(str(self.l_child.rule) if self.l_child else '')+' & '+(str(self.r_child.rule) if self.r_child else '')
@@ -30,6 +33,9 @@ class CYK:
         self.tokens=preprop.split(' ')  
         self.n=len(self.tokens)
         self.D=[]
+        '''
+        crea matrice 3D di nodi
+        '''
         for i in range(self.n):
             self.D.append(list())
             for j in range(self.n):
@@ -44,7 +50,7 @@ class CYK:
         for i in range(self.n):
             for rule in self.G.get_unit_productions():
                 if rule.production() == self.tokens[i]:
-                    
+                    #inizializza il primo livello
                     self.D[0][i][rule.index].rule=rule
                     self.D[0][i][rule.index].check()
         #print "non terminals [ok]"
@@ -58,6 +64,7 @@ class CYK:
                         #print rule
                         B=rule[0]
                         C=rule[1]
+                        #regole di B e C
                         rule_B=self.G.get_rules(B)
                         rule_C=self.G.get_rules(C)
                         # print rule_B, rule_C
@@ -65,12 +72,18 @@ class CYK:
                             for c in rule_C:
                                 if  self.D[k][j][b].checked() and self.D[i-k][j+k][c].checked():
                                     
-                                    
+                                    '''
+                                    se k,j,b e i-k,j+k,c sono stati visitati dal CYK
+                                    allora li aggiunge come figli di i,j,rule.index
+                                    e si marca come visitato
+                                    '''
                                     self.D[i][j][rule.index].l_child=self.D[k][j][b]
                                     self.D[i][j][rule.index].r_child=self.D[i-k][j+k][c]
                                     self.D[i][j][rule.index].rule=rule
                                     self.D[i][j][rule.index].check()
-
+                                    '''
+                                    assegna ai figli il padre
+                                    '''
                                     self.D[k][j][b].parent=rule
                                     self.D[i-k][j+k][c].parent=rule
                                     

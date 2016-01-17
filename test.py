@@ -9,14 +9,21 @@ parser.parse()
 #print parser.derivations()
 #pre-t
 #print parser.D
+
+'''
+per ogni produzione dello start symbol
+visito in profondita' e costruisco l'albero
+'''
 for x in G.get_start_rules():
 	P=[]
+	#nodo y	
 	y = parser.D[parser.n-1][0][x]
 	print y
-
+	#aggiungo figlio  sx e dx alla pila
 	P.append(y.l_child)
 	P.append(y.r_child)
 	while len(P)>0:
+		#tolgo q e aggiungo i suoi figli
 		q=P.pop()
 		if q!=None:
 			print q
