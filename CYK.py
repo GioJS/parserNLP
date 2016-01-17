@@ -22,7 +22,7 @@ class CYK:
         preprop = reduce(lambda a,b: a.replace(b, ' '+b), punctuation, self.s)
         self.tokens=preprop.split(' ')  
         self.n=len(self.tokens)
-        self.P=[[[False]*self.r]*self.n]*self.n
+        #self.P=[[[False]*self.r]*self.n]*self.n
         self.D=[]
         for i in range(self.n):
             self.D.append(list())
@@ -40,7 +40,7 @@ class CYK:
             for rule in self.G.get_unit_productions():
                 if rule.production() == self.tokens[i]:
                     #print i,rule,rule.index
-                    self.P[0][i][rule.index]=True
+                    #self.P[0][i][rule.index]=True
                     self.D[0][i][rule.index].rule=rule
         #print "non terminals [ok]"
         #for i=1 to n -> i=1 to n+1
@@ -58,8 +58,8 @@ class CYK:
                         # print rule_B, rule_C
                         for b in rule_B:
                             for c in rule_C:
-                                if self.P[k][j][b] and self.P[i-k][j+k][c]:
-                                    self.P[i][j][rule.index]=True
+                                if self.D[k][j][b] and self.D[i-k][j+k][c]:
+                                    #self.P[i][j][rule.index]=True
                                     self.D[k][j][b].parent=rule
                                     self.D[i-k][j+k][c].parent=rule
                                     self.D[i][j][rule.index].rule=rule
