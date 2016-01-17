@@ -28,8 +28,8 @@ class CYK:
             self.D.append(list())
             for j in range(self.n):
                 self.D[i].append(list())
-                # for k in range(self.r):
-                #     self.D[i][j].append(list())
+                for k in range(self.r):
+                    self.D[i][j].append(Node(None,None))
        # print self.D
 
     def parse(self):
@@ -41,7 +41,7 @@ class CYK:
                 if rule.production() == self.tokens[i]:
                     #print i,rule,rule.index
                     self.P[0][i][rule.index]=True
-                    self.D[0][i].append(Node(self.G[rule.index],None))
+                    self.D[0][i][rule.index].rule=rule
         #print "non terminals [ok]"
         #for i=1 to n -> i=1 to n+1
         for i in range(1,self.n):
@@ -60,8 +60,10 @@ class CYK:
                             for c in rule_C:
                                 if self.P[k][j][b] and self.P[i-k][j+k][c]:
                                     self.P[i][j][rule.index]=True
-                                    self.D[i][j].append(Node(self.G[b],self.G[rule.index]))
-                                    self.D[i][j].append(Node(self.G[c],self.G[rule.index]))
+                                    self.D[k][j][b].parent=rule
+                                    self.D[i-k][j+k][c].parent=rule
+                                    self.D[i][j][rule.index].rule=rule
+                                    self.D[i][j][rule.index].rule=rule
 
     def derivation(self,H):
         '''
@@ -75,9 +77,9 @@ class CYK:
             r=R.pop()
             #print r
             #print self.D[self.n-1][0][r]
-            if self.P[self.n-1][0][r]:
+            if (self.D[self.n-1][0][r]):
                 #print H,":",self.G[r]
-                d+=str(self.G[r])+'\n'
+                d+=str(self.D[self.n-1][0][r].rule)+'\n'
                 #print self.G.grammar[r]
                 #L=self.G[r].production().split(' ')
                 if self.G[r].count()==1:
@@ -92,9 +94,9 @@ class CYK:
         d=''
         for i in self.G.get_start_rules():
            # print i
-            if self.P[self.n-1][0][i]:
+            if (self.D[self.n-1][0][i]):
                 #print self.G[i]
-                d+=str(self.G[i])+'\n'
+                d+=str(self.D[self.n-1][0][i].rule)+'\n'
                 #L=self.G[i].production().split(' ')
                 if self.G[i].count()==1:
                     d+=self.derivation(self.G[i][0])
