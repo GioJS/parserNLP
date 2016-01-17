@@ -4,7 +4,6 @@ autori: Giordano Cristini, Caterina Masotti
 '''
 
 from Grammar import *
-import itertools
 class Node:
     def __init__(self,rule,parent,l_child,r_child):
         self.rule=rule
@@ -65,30 +64,30 @@ class CYK:
                         rule_B=self.G.get_rules(B)
                         rule_C=self.G.get_rules(C)
                         # print rule_B, rule_C
-                    for b,c in list(itertools.product(rule_B,rule_C)):
-                            # print '\n'
-                            # print self.D[k][j][b].rule
-                            # print self.D[i-k][j+k][c].rule
-                            # print '\n'
-                            #print (self.D[k][j][b].rule and self.D[i-k][j+k][c].rule)
-                            #print self.D[k][j][b].checked()  self.D[i-k][j+k][c].checked()
-                            if  self.D[k][j][b].checked() and self.D[i-k][j+k][c].checked():
-                                #self.P[i][j][rule.index]=True
-                                print rule
-                                #print self.D[k][j][b]
-                                #print self.D[i-k][j+k][c]
-                                
-                                self.D[i][j][rule.index].rule=rule
-                                self.D[i][j][rule.index].check()
+                        for b in rule_B:
+                            for c in rule_C:
+                                print b,c
+                                # print '\n'
+                                # print self.D[k][j][b].rule
+                                # print self.D[i-k][j+k][c].rule
+                                # print '\n'
+                                #print (self.D[k][j][b].rule and self.D[i-k][j+k][c].rule)
+                                #print self.D[k][j][b].checked()  self.D[i-k][j+k][c].checked()
+                                if  self.D[k][j][b].checked() and self.D[i-k][j+k][c].checked():
+                                    #self.P[i][j][rule.index]=True
+                                    print rule
+                                    #print self.D[k][j][b]
+                                    #print self.D[i-k][j+k][c]
+                                    self.D[k][j][b].parent=rule
+                                    self.D[i-k][j+k][c].parent=rule
+                                    self.D[i][j][rule.index].rule=rule
+                                    self.D[i][j][rule.index].check()
+                                    #print rule
+                                    #if (self.D[k][j][b].rule and self.D[i-k][j+k][c].rule):
+                                    self.D[i][j][rule.index].l_child=self.D[k][j][b]
+                                    self.D[i][j][rule.index].r_child=self.D[i-k][j+k][c]
 
-                                self.D[k][j][b].parent=self.D[i][j][rule.index]
-                                self.D[i-k][j+k][c].parent=self.D[i][j][rule.index]
-                                #print rule
-                                #if (self.D[k][j][b].rule and self.D[i-k][j+k][c].rule):
-                                self.D[i][j][rule.index].l_child=self.D[k][j][b]
-                                self.D[i][j][rule.index].r_child=self.D[i-k][j+k][c]
-
-                                #self.D[i][j][rule.index].rule=rule
+                                    #self.D[i][j][rule.index].rule=rule
 
     def derivation(self,H):
         '''
