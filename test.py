@@ -6,7 +6,11 @@ s='she eats a fish with a fork'
 parser=CYK(G,s)
 parser.parse()
 #print parser.derivations()
-print parser.D
+#pre-t
+for i in range(parser.n):
+	for j in range(len(G.grammar)):
+		if parser.D[0][i][j].rule:
+			print parser.D[0][i][j]
 # from StochasticGrammar import *
 
 # G=StochasticGrammar('S')
