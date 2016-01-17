@@ -11,7 +11,7 @@ parser.parse()
 print parser.D
 for x in G.get_start_rules():
 	P=[]
-	y = parser.D[0][1][x]
+	y = parser.D[parser.n-1][0][x]
 	print y
 
 	P.append(y.l_child)
