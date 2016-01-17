@@ -29,7 +29,6 @@ class CYK:
         preprop = reduce(lambda a,b: a.replace(b, ' '+b), punctuation, self.s)
         self.tokens=preprop.split(' ')  
         self.n=len(self.tokens)
-        #self.P=[[[False]*self.r]*self.n]*self.n
         self.D=[]
         for i in range(self.n):
             self.D.append(list())
@@ -37,7 +36,6 @@ class CYK:
                 self.D[i].append(list())
                 for k in range(self.r):
                     self.D[i][j].append(Node(None,None,None,None))
-       # print self.D
 
     def parse(self):
         '''
@@ -46,8 +44,7 @@ class CYK:
         for i in range(self.n):
             for rule in self.G.get_unit_productions():
                 if rule.production() == self.tokens[i]:
-                    #print i,rule,rule.index
-                    #self.P[0][i][rule.index]=True
+                    
                     self.D[0][i][rule.index].rule=rule
                     self.D[0][i][rule.index].check()
         #print "non terminals [ok]"
@@ -66,28 +63,19 @@ class CYK:
                         # print rule_B, rule_C
                         for b in rule_B:
                             for c in rule_C:
-                                print b,c
-                                # print '\n'
-                                # print self.D[k][j][b].rule
-                                # print self.D[i-k][j+k][c].rule
-                                # print '\n'
-                                #print (self.D[k][j][b].rule and self.D[i-k][j+k][c].rule)
-                                #print self.D[k][j][b].checked()  self.D[i-k][j+k][c].checked()
                                 if  self.D[k][j][b].checked() and self.D[i-k][j+k][c].checked():
-                                    #self.P[i][j][rule.index]=True
-                                    print rule
-                                    #print self.D[k][j][b]
-                                    #print self.D[i-k][j+k][c]
-                                    self.D[k][j][b].parent=rule
-                                    self.D[i-k][j+k][c].parent=rule
-                                    self.D[i][j][rule.index].rule=rule
-                                    self.D[i][j][rule.index].check()
-                                    #print rule
-                                    #if (self.D[k][j][b].rule and self.D[i-k][j+k][c].rule):
+                                    
+                                    
                                     self.D[i][j][rule.index].l_child=self.D[k][j][b]
                                     self.D[i][j][rule.index].r_child=self.D[i-k][j+k][c]
+                                    self.D[i][j][rule.index].rule=rule
+                                    self.D[i][j][rule.index].check()
 
-                                    #self.D[i][j][rule.index].rule=rule
+                                    self.D[k][j][b].parent=rule
+                                    self.D[i-k][j+k][c].parent=rule
+                                    
+                                    
+
 
     def derivation(self,H):
         '''
