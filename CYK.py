@@ -10,8 +10,13 @@ class Node:
         self.parent=parent
         self.l_child=l_child
         self.r_child=r_child
+        self.flag=False
     def __repr__(self):
         return str(self.rule)+' => '+(str(self.l_child.rule) if self.l_child else '')+' & '+(str(self.r_child.rule) if self.r_child else '')
+    def checked(self):
+        return self.flag
+    def check(self):
+        self.flag=True
 class CYK:
     
     def __init__(self,G,s):
@@ -44,6 +49,7 @@ class CYK:
                     #print i,rule,rule.index
                     #self.P[0][i][rule.index]=True
                     self.D[0][i][rule.index].rule=rule
+                    self.D[0][i][rule.index].check()
         #print "non terminals [ok]"
         #for i=1 to n -> i=1 to n+1
         for i in range(1,self.n+1):
@@ -60,19 +66,21 @@ class CYK:
                         # print rule_B, rule_C
                         for b in rule_B:
                             for c in rule_C:
-                                print '\n'
-                                print self.D[k][j][b].rule
-                                print self.D[i-k][j+k][c].rule
-                                print '\n'
+                                # print '\n'
+                                # print self.D[k][j][b].rule
+                                # print self.D[i-k][j+k][c].rule
+                                # print '\n'
                                 #print (self.D[k][j][b].rule and self.D[i-k][j+k][c].rule)
-                                if  (self.D[k][j][b].rule) and  (self.D[i-k][j+k][c].rule):
+
+                                if  self.D[k][j][b].checked() and self.D[i-k][j+k][c].checked():
                                     #self.P[i][j][rule.index]=True
-                                    #print rule
+                                    print rule
                                     #print self.D[k][j][b]
                                     #print self.D[i-k][j+k][c]
                                     self.D[k][j][b].parent=rule
                                     self.D[i-k][j+k][c].parent=rule
                                     self.D[i][j][rule.index].rule=rule
+                                    self.D[i][j][rule.index].check()
                                     #print rule
                                     #if (self.D[k][j][b].rule and self.D[i-k][j+k][c].rule):
                                     self.D[i][j][rule.index].l_child=self.D[k][j][b]
