@@ -55,9 +55,10 @@ class CYK:
                     self.D[0][i][rule.index].check()
         #print "non terminals [ok]"
         #for i=1 to n -> i=1 to n+1
-        for i in range(1,self.n+1):
+        for i in range(0,self.n-1):
             #for j=i-2 to 0 -> j=i-1 to 0
-            for j in range(0,self.n-i):
+            #print i
+            for j in range(0,self.n-i-1):
                 #for k=j+1 to i-1
                 for k in range(0,i+1):
                     for rule in self.G.get_nonunit_productions():
@@ -70,22 +71,26 @@ class CYK:
                         # print rule_B, rule_C
                         for b in rule_B:
                             for c in rule_C:
-                                if  self.D[k][j][b].checked() and self.D[i-k][j+k][c].checked():
-                                    
+                                #print i
+                                #print k,i-k
+                                print j+k+1,self.n
+                                #print self.D[k][j][b].checked(),self.D[i-k][j+k+1][c].checked()
+                                if  self.D[k][j][b].checked() and self.D[i-k][j+k+1][c].checked():
+                                    print 'dio'
                                     '''
                                     se k,j,b e i-k,j+k,c sono stati visitati dal CYK
                                     allora li aggiunge come figli di i,j,rule.index
                                     e si marca come visitato
                                     '''
-                                    self.D[i][j][rule.index].l_child=self.D[k][j][b]
-                                    self.D[i][j][rule.index].r_child=self.D[i-k][j+k][c]
-                                    self.D[i][j][rule.index].rule=rule
-                                    self.D[i][j][rule.index].check()
+                                    self.D[i+1][j][rule.index].l_child=self.D[k][j][b]
+                                    self.D[i+1][j][rule.index].r_child=self.D[i-k][j+k+1][c]
+                                    self.D[i+1][j][rule.index].rule=rule
+                                    self.D[i+1][j][rule.index].check()
                                     '''
                                     assegna ai figli il padre
                                     '''
                                     self.D[k][j][b].parent=rule
-                                    self.D[i-k][j+k][c].parent=rule
+                                    self.D[i-k][j+k+1][c].parent=rule
                                     
                                     
 

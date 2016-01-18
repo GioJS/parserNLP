@@ -20,15 +20,15 @@ for x in G.get_start_rules():
 	y = parser.D[parser.n-1][0][x]
 	print y
 	#aggiungo figlio  sx e dx alla pila
-	P.append(y.l_child)
 	P.append(y.r_child)
+	P.append(y.l_child)
 	while len(P)>0:
 		#tolgo q e aggiungo i suoi figli
 		q=P.pop()
 		if q!=None:
 			print q
-			P.append(q.l_child)
 			P.append(q.r_child)
+			P.append(q.l_child)
 # from StochasticGrammar import *
 
 # G=StochasticGrammar('S')
