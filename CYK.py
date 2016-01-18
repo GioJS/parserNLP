@@ -73,10 +73,9 @@ class CYK:
                             for c in rule_C:
                                 #print i
                                 #print k,i-k
-                                print j+k+1,self.n
+                                #print j+k+1,self.n
                                 #print self.D[k][j][b].checked(),self.D[i-k][j+k+1][c].checked()
                                 if  self.D[k][j][b].checked() and self.D[i-k][j+k+1][c].checked():
-                                    print 'dio'
                                     '''
                                     se k,j,b e i-k,j+k,c sono stati visitati dal CYK
                                     allora li aggiunge come figli di i,j,rule.index
@@ -95,40 +94,44 @@ class CYK:
                                     
 
 
-    def derivation(self,H):
+    def getTrees(self):
         '''
-        Visualizza la derivazione di una data testa di produzione H
+        per ogni produzione dello start symbol
+        visito in profondita' e costruisco l'albero
         '''
-        R=self.G.get_rules(H)
-        d=''
-        #print H
-        while len(R)>0:
-            #print R
-            r=R.pop()
-            #print r
-            #print self.D[self.n-1][0][r]
-            if (self.D[self.n-1][0][r]).rule:
-                #print H,":",self.G[r]
-                d+=str(self.D[self.n-1][0][r])+'\n'
-                #print self.G.grammar[r]
-                #L=self.G[r].production().split(' ')
-                if self.G[r].count()==1:
-                    R+=self.G.get_rules(self.G[r][0])
-                    R+=self.G.get_rules(self.G[r][1])
-        return d+'\n'
+        trees=[]
+        for x in self.G.get_start_rules():
+            s='('
+            P=[]
+            #nodo y 
+            y = self.D[self.n-1][0][x]
+            s+=y.rule.head()+' '
+            #aggiungo figlio  sx e dx alla pila
+            P.append(y)
+            P.append(y.r_child)
+            P.append(y.l_child)
+            #lista radici
+            roots=[y]
+            while len(P)>0:
+                #tolgo q e aggiungo i suoi figli
+                q=P.pop()
+                #se l'ho gia' visitato allora chiudo l'albero
+                #certo non e' efficiente cosi' magari si crea
+                #un vettore di bools grande n e si usa quello
+                #magari prova te io me so rotto per oggi XD
+                if q in roots:
+                    s+=') '
+                else:
+                    #print q.rule
+                    if q and q.l_child and q.r_child:
+                        s+='('+q.rule.head()+' '
+                        P.append(q)
+                        roots.append(q)
+                        P.append(q.r_child)
+                        P.append(q.l_child)
+                    else:
+                        s+='('+q.rule.head()+' '+q.rule.production()+') '
+                
 
-    def derivations(self):
-        '''
-        Partendo dalla start symbol, visualizza ogni sua derivazione
-        '''
-        d=''
-        for i in self.G.get_start_rules():
-           # print i
-            if (self.D[self.n-1][0][i]).rule:
-                #print self.G[i]
-                d+=str(self.D[self.n-1][0][i])+'\n'
-                #L=self.G[i].production().split(' ')
-                if self.G[i].count()==1:
-                    d+=self.derivation(self.G[i][0])
-                    d+=self.derivation(self.G[i][1])
-        return d
+            trees.append(s)
+        return trees
