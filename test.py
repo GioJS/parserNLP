@@ -13,15 +13,20 @@ if not prob:
 	G=Grammar('S')
 	G.add_rules_from_file('gramm_test')
 	#print G.get_unit_productions()
-	s=raw_input('write a phrase: ')
+	#s=raw_input('write a phrase: ')
+	s="she eats a fish with a fork"
 	parser=CYK(G,s)
 	parser.parse()
-	#print parser.D
+	print parser.C.matrix
+	for i in range(parser.n):
+		for j in range(parser.n):
+			for r in parser.C[i,j]:
+				print parser.G[r.rule]
 	#print parser.derivations()
 	#pre-t
 	#print parser.D
 
-	print parser.getTrees()
+	#print parser.getTrees()
 else:
 	from StochasticGrammar import *
 
