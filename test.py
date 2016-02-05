@@ -13,7 +13,7 @@ if not prob:
 	G=Grammar('S')
 	G.add_rules_from_file('gramm_test')
 	#print G.get_unit_productions()
-	s='she eats a fish with a fork'
+	s=raw_input('write a phrase: ')
 	parser=CYK(G,s)
 	parser.parse()
 	#print parser.D
