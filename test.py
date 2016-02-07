@@ -17,7 +17,7 @@ if not prob:
 	s="she eats a fish with a fork"
 	parser=CYK(G,s)
 	parser.parse()
-	print parser.C[0,0]
+	print parser.C.matrix
 	for i in range(parser.n):
 		for j in range(parser.n):
 			for r in parser.C[i,j]:

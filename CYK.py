@@ -96,7 +96,7 @@ class CYK:
                     # self.D[0][i][rule.index].check()
         #print "non terminals [ok]"
         #for i=1 to n -> i=1 to n+1
-        for i in range(1,self.n-1):
+        for i in range(1,self.n):
             #for j=i-2 to 0 -> j=i-1 to 0
             #print i
             for j in range(0,self.n-i):
@@ -133,7 +133,7 @@ class CYK:
                                 #     self.D[i-k][j+k+1][c].parent=rule
                                 #print j,k,self.C[j,j+k]
                                 if self.G[b] in self.C[j,j+k] and self.G[c] in self.C[j+k+1,j+i]:
-                                    self.C[i,i+j].addChart(rule,j+k)
+                                    self.C[j,i+j].addChart(rule,j+k)
 
                                     
                                     
@@ -145,4 +145,5 @@ class CYK:
         visito in profondita' e costruisco l'albero
         '''
         trees=[]
+
         
