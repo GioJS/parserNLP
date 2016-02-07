@@ -27,6 +27,11 @@ class ChartList(list):
             if x==i.rule:
                 return True
         return False
+    def __repr__(self):
+        s=''
+        for i in self:
+            s+=str(i)+'\t'
+        return s
 '''
 Struttura utilizzabile in un algoritmo di chart parsing
 '''
@@ -41,6 +46,14 @@ class ChartMatrix:
     def __getitem__(self,pos):
         x,y=pos
         return self.matrix[x][y]
+    def __repr__(self):
+        s=''
+        for i in range(len(self.matrix)):
+            si=''
+            for j in range(len(self.matrix)):
+                si+=str(self[i,j]) if self[i,j] else '\t-\t'
+            s+=si+'\n'
+        return s
 # class Node:
 #     def __init__(self,rule,parent,l_child,r_child):
 #         self.rule=rule
