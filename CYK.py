@@ -91,6 +91,7 @@ class CYK:
             for rule in self.G.get_unit_productions():
                 if rule.production() == self.tokens[i]:
                     #inizializza il primo livello
+                    #print rule
                     self.C[i,i].addChart(rule,0)
                     # self.D[0][i][rule.index].rule=rule
                     # self.D[0][i][rule.index].check()
@@ -133,17 +134,15 @@ class CYK:
                                 #     self.D[i-k][j+k+1][c].parent=rule
                                 #print j,k,self.C[j,j+k]
                                 if self.G[b] in self.C[j,j+k] and self.G[c] in self.C[j+k+1,j+i]:
-                                    self.C[j,i+j].addChart(rule,j+k)
-
-                                    
-                                    
-
-
+                                    self.C[j,i+j].addChart(rule,j+k+1)
+    
     def getTrees(self):
         '''
         per ogni produzione dello start symbol
         visito in profondita' e costruisco l'albero
         '''
         trees=[]
+
+        
 
         
