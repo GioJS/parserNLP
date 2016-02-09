@@ -18,11 +18,8 @@ if not prob:
 	parser=CYK(G,s)
 	parser.parse()
 	print parser.C
-	#parser.getTrees()
-	for i in range(parser.n):
-		for j in range(parser.n):
-	 		for r in parser.C[i,j]:
-	 			print r
+	print parser.getTrees()
+	
 	#print parser.derivations()
 	#pre-t
 	#print parser.D

@@ -151,10 +151,30 @@ class CYK:
     
     def getTrees(self):
         '''
-        per ogni produzione dello start symbol
-        visito in profondita' e costruisco l'albero
+        quello che mi è venuto in mente è abbastanza strambo:
+        ricreo la situazione del metodo parse:
+        e vado a a controllare quello che viene messo negli indici di cui sopra
+        poi viene una cosa che forse non ha senso ma nemmeno troppo sbagliata
+        se r1 e r2 fanno riferimento a r(r->r1 r2) vedo se il valore:
+        r1.split_point+r.split_point=r2.split_point+r.split_point
+        che forse mi deve dire che i due sono lo split del primo (r)
+        questo funziona quasi del tutto ma solo in 3 casi è vero
+        mancano altri casi, forse mi sto avvicinando XD
         '''
         trees=[]
+        for i in range(1,self.n):
+            for j in range(0,self.n-i):
+                for k in range(0,i):
+                    for r1 in self.C[j,j+k]:
+                        i_r1=r1.split_point
+                        for r2 in self.C[j+k+1,j+i]:
+                            i_r2=r2.split_point
+                            for r in self.C[j,i+j]:
+                                #print r1,r2,r
+                                print i_r1,i_r2,r.split_point
+                                if (r.rule[0]==r1.rule.head() and r.rule[1]==r2.rule.head()) and i_r1+r.split_point==i_r2+r.split_point:
+                                    print r,r1,r2
+
 
         
 
