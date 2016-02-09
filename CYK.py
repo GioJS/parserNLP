@@ -151,7 +151,7 @@ class CYK:
     
     def getTrees(self):
         '''
-        quello che mi è venuto in mente è abbastanza strambo:
+        quello che mi e venuto in mente e abbastanza strambo:
         ricreo la situazione del metodo parse:
         e vado a a controllare quello che viene messo negli indici di cui sopra
         poi viene una cosa che forse non ha senso ma nemmeno troppo sbagliata
