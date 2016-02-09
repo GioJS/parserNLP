@@ -158,7 +158,7 @@ class CYK:
         se r1 e r2 fanno riferimento a r(r->r1 r2) vedo se il valore:
         r1.split_point+r.split_point=r2.split_point+r.split_point
         che forse mi deve dire che i due sono lo split del primo (r)
-        questo funziona quasi del tutto ma solo in 3 casi è vero
+        questo funziona quasi del tutto ma solo in 3 casi e vero
         mancano altri casi, forse mi sto avvicinando XD
         '''
         trees=[]
