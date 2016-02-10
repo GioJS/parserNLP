@@ -19,7 +19,6 @@ if not prob:
 	parser.parse()
 	print parser.C
 	print parser.getTrees()
-	
 	#print parser.derivations()
 	#pre-t
 	#print parser.D

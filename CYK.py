@@ -4,6 +4,7 @@ autori: Giordano Cristini, Caterina Masotti
 '''
 
 from Grammar import *
+import copy
 
 '''
 Classe che rappresenta il Chart ( regola , split point)
@@ -102,37 +103,54 @@ class CYK:
                             for c in rule_C:
                                 if self.G[b] in self.C[j,j+k] and self.G[c] in self.C[j+k+1,j+i]:
                                     self.C[j,i+j].addChart(rule,j+k+1)
+
+    def chartSearch(self,chart_list,NT):
+        for chart in chart_list:
+            if chart.rule.head()==NT:
+                return chart
+        return None
     
     def getTrees(self):
 
         #chart delle starting rules
-        chart_list=self.C[0,self.n-1]
+        chart_list=copy.copy(self.C[0,self.n-1])
         #lista degli alberi
         trees=[]
         #pila di supporto per costruire gli alberi
-        stack=chart_list
+        stack=[(chart,0,self.n-1) for chart in chart_list]
+        #print stack
+        tree=''
 
         while len(stack)>0:
-            tree=''
-            chart=stack.pop()
-
+            chart,start_index,end_index=stack.pop()
+            if chart==None:
+                tree+=') '
+                continue
             if chart.rule.head()==self.G.S:
+
                 if len(tree)>0:
-                    tree+=')'
+                    tree+=') '
                     trees.append(tree)
+                    tree=''
 
             if chart.split_point>0:
-                tree='('+chart.rule.head()+' '
+               # print chart.rule
+                tree+='('+chart.rule.head()+' '
+                split_index=chart.split_point
                 b=chart.rule[0]
                 c=chart.rule[1]
+                stack.append((None,0,0))
+                stack.append((self.chartSearch(self.C[split_index,end_index],c),split_index,end_index))
+                stack.append((self.chartSearch(self.C[start_index,split_index-1],b),start_index,split_index-1))
+               
 
             else:
-                tree+='('+chart.rule.head()+' '+chart.rule.production()+')'
+                tree+='('+chart.rule.head()+' '+chart.rule.production()+') '
 
         tree+=')'
         trees.append(tree)
-        
-    return trees
+
+        return trees
 
         
         
