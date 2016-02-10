@@ -11,7 +11,7 @@ prob=true_answer(raw_input('probabilistico? '))
 
 if not prob:
 	G=Grammar('S')
-	G.add_rules_from_file('gramm_test')
+	G.add_rules_from_file('BigGrammar')
 	#print G.get_unit_productions()
 	#s=raw_input('write a phrase: ')
 	s="she eats a fish with a fork"

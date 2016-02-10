@@ -114,6 +114,7 @@ class CYK:
 
         #chart delle starting rules
         chart_list=copy.copy(self.C[0,self.n-1])
+        
         #lista degli alberi
         trees=[]
         #pila di supporto per costruire gli alberi
