@@ -31,7 +31,10 @@ else:
 	G=StochasticGrammar('S')
 	G.add_rules_from_file('gramm_test')
 	G.init_chances()
-	print G.grammar_chances
-	k=5
+	#print G.getKMax('VP',2)
+	#print G.grammar_chances
+	k=2
 	parser=CYKProb(G,s,k)
-	
+	parser.parse()
+	print parser.C
+	print parser.getTrees()

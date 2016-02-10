@@ -7,4 +7,42 @@ class CYKProb(CYK):
 
 	#override	
 	def parse(self):
-		pass
+		'''
+		    Metodo che implementa il parser CYK probabilistico
+		'''
+		for i in range(self.n):
+		    for rule in self.G.get_unit_productions():
+		    	for rule_i,rule_p in self.G.getKMax(rule.head(),self.k):
+		    		max_rule=self.G[rule_i]
+		    		if not max_rule.is_preterminal():
+		    			continue
+			        if max_rule.production() == self.tokens[i]:
+			            #inizializza il primo livello
+			            #print rule
+			            self.C[i,i].addChart(max_rule,0)
+		            
+		#print "non terminals [ok]"
+		#for i=1 to n -> i=1 to n+1
+		for i in range(1,self.n):
+		    #for j=i-2 to 0 -> j=i-1 to 0
+		    #print i
+		    for j in range(0,self.n-i):
+		        #for k=j+1 to i-1
+		        for k in range(0,i):
+					for rule in self.G.get_nonunit_productions():
+						for rule_i,rule_p in self.G.getKMax(rule.head(),self.k):
+							max_rule=self.G[rule_i]
+							#print max_rule
+					    	#print rule
+					    	if max_rule.is_preterminal():
+					    		continue
+					        B=max_rule[0]
+					        C=max_rule[1]
+					        #regole di B e C
+					        rule_B=self.G.get_rules(B)
+					        rule_C=self.G.get_rules(C)
+					        # print rule_B, rule_C
+					        for b in rule_B:
+					            for c in rule_C:
+					                if self.G[b] in self.C[j,j+k] and self.G[c] in self.C[j+k+1,j+i]:
+					                    self.C[j,i+j].addChart(rule,j+k+1)

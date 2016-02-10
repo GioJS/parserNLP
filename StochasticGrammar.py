@@ -5,6 +5,9 @@ autori: Giordano Cristini, Caterina Masotti
 
 from Grammar import *
 import random
+import copy
+from itertools import islice
+from operator import *
 
 class StochasticGrammar(Grammar):
 
@@ -40,5 +43,12 @@ class StochasticGrammar(Grammar):
 				
 				#chances.normalize()
 				self.grammar_chances[group]=chances
+
+	def getKMax(self,H,k):
+		H_chances=copy.copy(self.grammar_chances[H])
+		l_c=sorted(H_chances.iteritems(),key=itemgetter(1),reverse=True)
+		return l_c[:k]
+		
+
 
 
