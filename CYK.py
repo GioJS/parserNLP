@@ -125,11 +125,14 @@ class CYK:
                 tree='('+chart.rule.head()+' '
                 b=chart.rule[0]
                 c=chart.rule[1]
+
             else:
                 tree+='('+chart.rule.head()+' '+chart.rule.production()+')'
-                
+
         tree+=')'
         trees.append(tree)
+        
+    return trees
 
         
         
