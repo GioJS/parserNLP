@@ -104,6 +104,33 @@ class CYK:
                                     self.C[j,i+j].addChart(rule,j+k+1)
     
     def getTrees(self):
+
+        #chart delle starting rules
+        chart_list=self.C[0,self.n-1]
+        #lista degli alberi
+        trees=[]
+        #pila di supporto per costruire gli alberi
+        stack=chart_list
+
+        while len(stack)>0:
+            tree=''
+            chart=stack.pop()
+
+            if chart.rule.head()==self.G.S:
+                if len(tree)>0:
+                    tree+=')'
+                    trees.append(tree)
+
+            if chart.split_point>0:
+                tree='('+chart.rule.head()+' '
+                b=chart.rule[0]
+                c=chart.rule[1]
+            else:
+                tree+='('+chart.rule.head()+' '+chart.rule.production()+')'
+                
+        tree+=')'
+        trees.append(tree)
+
         
         
 
