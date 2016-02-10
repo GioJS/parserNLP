@@ -104,14 +104,9 @@ class CYK:
                                     self.C[j,i+j].addChart(rule,j+k+1)
     
     def getTrees(self):
-        '''
-        Ottenere gli alberi per mezzo di BOH
-        BOH
-        BOH
-        BOH
-        BOH
-        '''
-        trees=[]
+        
+        
+
         
 
 
