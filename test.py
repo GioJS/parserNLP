@@ -29,11 +29,11 @@ else:
 	from CYKProb import *
 	s="she eats a fish with a fork"
 	G=StochasticGrammar('S')
-	G.add_rules_from_file('gramm_test')
+	G.add_rules_from_file('BigGrammar')
 	G.init_chances()
 	#print G.getKMax('VP',2)
 	#print G.grammar_chances
-	k=2
+	k=1
 	parser=CYKProb(G,s,k)
 	parser.parse()
 	print parser.C

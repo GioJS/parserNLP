@@ -39,8 +39,8 @@ class CYKProb(CYK):
 					        B=max_rule[0]
 					        C=max_rule[1]
 					        #regole di B e C
-					        rule_B=self.G.get_rules(B)
-					        rule_C=self.G.get_rules(C)
+					        rule_B=self.G.getKMax(B,self.k)
+					        rule_C=self.G.getKMax(C,self.k)
 					        # print rule_B, rule_C
 					        for b in rule_B:
 					            for c in rule_C:
