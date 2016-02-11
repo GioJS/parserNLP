@@ -6,9 +6,8 @@ autori: Giordano Cristini, Caterina Masotti
 from Grammar import *
 import random
 import copy
-from itertools import islice
-from operator import *
-
+import heapq
+import operator
 class StochasticGrammar(Grammar):
 
 	def __init__(self,S):
@@ -45,9 +44,8 @@ class StochasticGrammar(Grammar):
 				self.grammar_chances[group]=chances
 
 	def getKMax(self,H,k):
-		H_chances=copy.copy(self.grammar_chances[H])
-		l_c=sorted(H_chances.iteritems(),key=itemgetter(1),reverse=True)
-		return l_c[:k]
+		itemlist=[(key,v) for key,v in self.grammar_chances[H].iteritems()]
+		return heapq.nlargest(k,itemlist)
 		
 
 

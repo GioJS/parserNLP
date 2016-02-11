@@ -27,9 +27,9 @@ if not prob:
 else:
 	from StochasticGrammar import *
 	from CYKProb import *
-	s="she eats a fish with a fork"
+	s="the cat"
 	G=StochasticGrammar('S')
-	G.add_rules_from_file('gramm_test')
+	G.add_rules_from_file('BigGrammar')
 	G.init_chances()
 	#print G.getKMax('VP',2)
 	#print G.grammar_chances

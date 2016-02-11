@@ -29,13 +29,13 @@ class CYKProb(CYK):
 		    for j in range(0,self.n-i):
 		        #for k=j+1 to i-1
 		        for k in range(0,i):
-					for rule in self.G.get_nonunit_productions():
-						for rule_i,rule_p in self.G.getKMax(rule.head(),self.k):
+					for rule in self.G.groups.keys():
+						for rule_i,rule_p in self.G.getKMax(rule,self.k):
 							max_rule=self.G[rule_i]
 							#print max_rule
 					    	#print rule
 					    	if max_rule.is_preterminal():
-					    		continue
+					    		break
 					        B=max_rule[0]
 					        C=max_rule[1]
 					        #regole di B e C
@@ -45,4 +45,4 @@ class CYKProb(CYK):
 					        for b,x in rule_B:
 					            for c,y in rule_C:
 					                if self.G[b] in self.C[j,j+k] and self.G[c] in self.C[j+k+1,j+i]:
-					                    self.C[j,i+j].addChart(rule,j+k+1)
+					                    self.C[j,i+j].addChart(max_rule,j+k+1)
