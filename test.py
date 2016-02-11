@@ -8,13 +8,13 @@ def true_answer(ans):
 
 prob=true_answer(raw_input('probabilistico? '))
 
-
+s="she eats a fish with a fork"
 if not prob:
 	G=Grammar('S')
 	G.add_rules_from_file('BigGrammar')
 	#print G.get_unit_productions()
 	#s=raw_input('write a phrase: ')
-	s="she eats a fish with a fork"
+	
 	parser=CYK(G,s)
 	parser.parse()
 	print parser.C
@@ -27,13 +27,13 @@ if not prob:
 else:
 	from StochasticGrammar import *
 	from CYKProb import *
-	s="the cat"
+	
 	G=StochasticGrammar('S')
 	G.add_rules_from_file('BigGrammar')
 	G.init_chances()
 	#print G.getKMax('VP',2)
 	#print G.grammar_chances
-	k=1
+	k=100
 	parser=CYKProb(G,s,k)
 	parser.parse()
 	print parser.C

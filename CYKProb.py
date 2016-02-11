@@ -11,8 +11,8 @@ class CYKProb(CYK):
 		    Metodo che implementa il parser CYK probabilistico
 		'''
 		for i in range(self.n):
-		    for rule in self.G.get_unit_productions():
-		    	for rule_i,rule_p in self.G.getKMax(rule.head(),self.k):
+		    for rule in self.G.groups.keys():
+		    	for rule_i,rule_p in self.G.getKMax(rule,self.k):
 		    		max_rule=self.G[rule_i]
 		    		if not max_rule.is_preterminal():
 		    			continue
@@ -35,7 +35,7 @@ class CYKProb(CYK):
 							#print max_rule
 					    	#print rule
 					    	if max_rule.is_preterminal():
-					    		break
+					    		continue
 					        B=max_rule[0]
 					        C=max_rule[1]
 					        #regole di B e C
