@@ -29,7 +29,7 @@ else:
 	from CYKProb import *
 	s="she eats a fish with a fork"
 	G=StochasticGrammar('S')
-	G.add_rules_from_file('BigGrammar')
+	G.add_rules_from_file('gramm_test')
 	G.init_chances()
 	#print G.getKMax('VP',2)
 	#print G.grammar_chances

@@ -42,7 +42,7 @@ class CYKProb(CYK):
 					        rule_B=self.G.getKMax(B,self.k)
 					        rule_C=self.G.getKMax(C,self.k)
 					        # print rule_B, rule_C
-					        for b in rule_B:
-					            for c in rule_C:
+					        for b,x in rule_B:
+					            for c,y in rule_C:
 					                if self.G[b] in self.C[j,j+k] and self.G[c] in self.C[j+k+1,j+i]:
 					                    self.C[j,i+j].addChart(rule,j+k+1)
