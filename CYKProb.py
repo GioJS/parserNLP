@@ -11,15 +11,11 @@ class CYKProb(CYK):
 		    Metodo che implementa il parser CYK probabilistico
 		'''
 		for i in range(self.n):
-		    for rule in self.G.groups.keys():
-		    	for rule_i,rule_p in self.G.getKMax(rule,self.k):
-		    		max_rule=self.G[rule_i]
-		    		if not max_rule.is_preterminal():
-		    			continue
-			        if max_rule.production() == self.tokens[i]:
-			            #inizializza il primo livello
-			            #print rule
-			            self.C[i,i].addChart(max_rule,0)
+		    for rule in self.G.get_unit_productions():
+		        if rule.production() == self.tokens[i]:
+		            #inizializza il primo livello
+		            #print rule
+		            self.C[i,i].addChart(rule,0)
 		            
 		#print "non terminals [ok]"
 		#for i=1 to n -> i=1 to n+1
@@ -29,20 +25,24 @@ class CYKProb(CYK):
 		    for j in range(0,self.n-i):
 		        #for k=j+1 to i-1
 		        for k in range(0,i):
-					for rule in self.G.groups.keys():
-						for rule_i,rule_p in self.G.getKMax(rule,self.k):
-							max_rule=self.G[rule_i]
-							#print max_rule
-					    	#print rule
-					    	if max_rule.is_preterminal():
-					    		continue
-					        B=max_rule[0]
-					        C=max_rule[1]
-					        #regole di B e C
-					        rule_B=self.G.getKMax(B,self.k)
-					        rule_C=self.G.getKMax(C,self.k)
-					        # print rule_B, rule_C
-					        for b,x in rule_B:
-					            for c,y in rule_C:
-					                if self.G[b] in self.C[j,j+k] and self.G[c] in self.C[j+k+1,j+i]:
-					                    self.C[j,i+j].addChart(max_rule,j+k+1)
+		            for rule in self.G.get_nonunit_productions():
+		                #print rule
+		                B=rule[0]
+		                C=rule[1]
+		                #regole di B e C
+		                rule_B=self.G.get_rules(B)
+		                rule_C=self.G.get_rules(C)
+		                # print rule_B, rule_C
+		                best=0
+		                best_r=None
+		                for b in rule_B:
+		                    for c in rule_C:
+		                        if self.G[b] in self.C[j,j+k] and self.G[c] in self.C[j+k+1,j+i]:
+		                			t1=self.G.grammar_chances[self.G[b].head()][b]
+		                			t2=self.G.grammar_chances[self.G[c].head()][c]
+		                			candidate=t1*t2*self.G.grammar_chances[rule.head()][rule.index]
+		                			if candidate>best:
+		                				best=candidate
+		                				best_r=rule
+		                if best_r:
+		                	self.C[j,i+j].addChart(best_r,j+k+1)
