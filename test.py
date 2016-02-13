@@ -33,7 +33,7 @@ else:
 	G.init_chances()
 	#print G.getKMax('VP',2)
 	#print G.grammar_chances
-	k=5000
+	k=2
 	parser=CYKProb(G,s,k)
 	parser.parse()
 	print parser.C

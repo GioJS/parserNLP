@@ -38,9 +38,9 @@ class CYKProb(CYK):
 		                for b in rule_B:
 		                    for c in rule_C:
 		                        if self.G[b] in self.C[j,j+k] and self.G[c] in self.C[j+k+1,j+i]:
-		                			t1=self.G.grammar_chances[self.G[b].head()][b]
-		                			t2=self.G.grammar_chances[self.G[c].head()][c]
-		                			candidate=t1*t2*self.G.grammar_chances[rule.head()][rule.index]
+		                			t1=self.G.getPr(self.G[b])
+		                			t2=self.G.getPr(self.G[c])
+		                			candidate=t1*t2*self.G.getPr(rule)
 		                			if candidate>best:
 		                				best=candidate
 		                				best_r=rule

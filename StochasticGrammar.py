@@ -43,9 +43,11 @@ class StochasticGrammar(Grammar):
 				#chances.normalize()
 				self.grammar_chances[group]=chances
 
-	def getKMax(self,H,k):
-		itemlist=[(key,v) for key,v in self.grammar_chances[H].iteritems()]
-		return heapq.nlargest(k,itemlist)
+	def getPr(self,rule):
+		return self.grammar_chances[self[rule.index].head()][rule.index]
+	# def getKMax(self,H,k):
+	# 	itemlist=[(key,v) for key,v in self.grammar_chances[H].iteritems()]
+	# 	return heapq.nlargest(k,itemlist)
 		
 
 
