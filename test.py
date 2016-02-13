@@ -1,10 +1,17 @@
 #encoding: utf-8
-from CYK import *
+import signal
+import sys
 
+from CYK import *
+def signal_handler(signal, frame):
+        print 'Sei uscito!'
+        sys.exit(0)
 def true_answer(ans):
     if ans.strip().lower() in ['true','1','yes','ok','sì','si','ja','da','oui']:
         return True
     return False
+
+signal.signal(signal.SIGINT, signal_handler)
 
 prob=true_answer(raw_input('probabilistico? '))
 
@@ -29,7 +36,7 @@ else:
 	from CYKProb import *
 	
 	G=StochasticGrammar('S')
-	G.add_rules_from_file('gramm_test')
+	G.add_rules_from_file('BigGrammar')
 	G.init_chances()
 	#print G.getKMax('VP',2)
 	#print G.grammar_chances
