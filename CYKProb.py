@@ -35,6 +35,7 @@ class CYKProb(CYK):
 		        #for k=j+1 to i-1
 		        for k in range(0,i):
 		            for rule in self.G.get_nonunit_productions():
+		            	limit=0
 		                #print rule
 		                B=rule[0]
 		                C=rule[1]
@@ -52,5 +53,11 @@ class CYKProb(CYK):
 	                			prob=t1*t2*self.G.getPr(rule)
 
 	                			if prob>self.P[j][j+i][rule.index]:
+	                				limit+=1
+	                				print limit,prob,rule
 	                				self.P[j][j+i][rule.index]=prob
 	                				self.C[j,i+j].addChart(rule,j+k+1)
+	                			if limit==self.n:
+	                				break
+		                    if limit == self.n:
+		                    	break
