@@ -57,7 +57,7 @@ class CYKProb(CYK):
 	                				print limit,prob,rule
 	                				self.P[j][j+i][rule.index]=prob
 	                				self.C[j,i+j].addChart(rule,j+k+1)
-	                			if limit==self.n:
+	                			if limit==self.k:
 	                				break
-		                    if limit == self.n:
+		                    if limit == self.k:
 		                    	break
