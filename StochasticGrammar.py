@@ -31,6 +31,7 @@ class StochasticGrammar(Grammar):
 				rands=[random.uniform(0,1) for i in range(len(self.groups[group]))]
 				s = sum(rands)
 				rands = [ i/s for i in rands ]
+				rands.sort(reverse=True)
 				for rule in self.groups[group]:
 					#while True:
 					#	try:
