@@ -42,6 +42,8 @@ else:
 	#print G.grammar_chances
 	k=2
 	parser=CYKProb(G,s,k)
+
 	parser.parse()
-	print parser.C
+	#print parser.P
+	#print parser.C
 	print parser.getTrees()

@@ -28,7 +28,7 @@ class StochasticGrammar(Grammar):
 				self.grammar_chances[group]=chances
 				#print self.grammar[self.groups[group][0]], 1.0
 			else:
-				rands=[random.gauss(0,1) for i in range(len(self.groups[group]))]
+				rands=[random.uniform(0,1) for i in range(len(self.groups[group]))]
 				s = sum(rands)
 				rands = [ i/s for i in rands ]
 				for rule in self.groups[group]:
