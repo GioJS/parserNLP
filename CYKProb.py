@@ -51,8 +51,9 @@ class CYKProb(CYK):
 	                			t2=self.P[j+k+1][j+i][c]
 
 	                			prob=t1*t2*self.G.getPr(rule)
-
-	                			if prob>self.P[j][j+i][rule.index]:
+	                			# print prob
+	                			# print self.P[j][j+i][rule.index]
+	                			if prob>=self.P[j][j+i][rule.index]:
 	                				limit+=1
 	                				print limit,prob,rule
 	                				self.P[j][j+i][rule.index]=prob
