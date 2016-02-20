@@ -1,7 +1,10 @@
 #encoding: utf-8
 import signal
 import sys
-import datetime
+import time
+
+
+
 from CYK import *
 def signal_handler(signal, frame):
         print 'Sei uscito!'
@@ -14,7 +17,9 @@ def true_answer(ans):
 signal.signal(signal.SIGINT, signal_handler)
 
 prob=true_answer(raw_input('probabilistico? '))
-print 'inizio: '+datetime.datetime.now().time().isoformat()
+start = time.clock()
+
+
 s="she eats a fish with a fork"
 if not prob:
 	G=Grammar('S')
@@ -36,7 +41,7 @@ else:
 	from CYKProb import *
 	
 	G=StochasticGrammar('S')
-	G.add_rules_from_file('BigGrammar')
+	G.add_rules_from_file('gramm_test')
 	G.init_chances()
 	#print G.getKMax('VP',2)
 	#print G.grammar_chances
@@ -47,4 +52,5 @@ else:
 	#print parser.P
 	#print parser.C
 	print parser.getTrees()
-print 'fine: '+datetime.datetime.now().time().isoformat()
+end = time.clock()
+print "%.2gs" % (end-start)
