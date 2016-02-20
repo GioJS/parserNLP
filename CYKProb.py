@@ -49,7 +49,8 @@ class CYKProb(CYK):
 	                        #if self.G[b] in self.C[j,j+k] and self.G[c] in self.C[j+k+1,j+i]:
 	                			t1=self.P[j][j+k][self.G.getHeadIndex(self.G[b].head())]
 	                			t2=self.P[j+k+1][j+i][self.G.getHeadIndex(self.G[c].head())]
-	                			
+	                			if t1==0 or t2==0:
+	                				continue
 	                			prob=t1*t2*self.G.getPr(rule)
 
 	                			# print prob

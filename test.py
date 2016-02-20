@@ -36,7 +36,7 @@ else:
 	from CYKProb import *
 	
 	G=StochasticGrammar('S')
-	G.add_rules_from_file('BigGrammar')
+	G.add_rules_from_file('gramm_test')
 	G.init_chances()
 	#print G.getKMax('VP',2)
 	#print G.grammar_chances
