@@ -5,7 +5,7 @@ autori: Giordano Cristini, Caterina Masotti
 
 from Grammar import *
 import copy
-
+from trees import *
 '''
 Classe che rappresenta il Chart ( regola , split point)
 '''
@@ -13,6 +13,7 @@ class Chart:
     def __init__(self,rule,split_point=0):
         self.rule=rule
         self.split_point=split_point
+    
     def __repr__(self):
         return "("+str(self.rule)+","+str(self.split_point)+")"
 '''
@@ -28,6 +29,7 @@ class ChartList(list):
             if x==i.rule:
                 return True
         return False
+    
     def __repr__(self):
         s=''
         for i in self:
@@ -114,42 +116,50 @@ class CYK:
 
         #chart delle starting rules
         chart_list=copy.copy(self.C[0,self.n-1])
-        
+       # print chart_list.search(chart_list[0])
         #lista degli alberi
         trees=[]
         #pila di supporto per costruire gli alberi
         stack=[(chart,0,self.n-1) for chart in chart_list]
+        #print chart_list[0]
+        #tree=''
         #print stack
-        tree=''
-
+        tree=None
         while len(stack)>0:
+            #print stack
             chart,start_index,end_index=stack.pop()
-            if chart==None:
-                tree+=') '
+            #print chart,start_index,end_index
+            if chart == None:
+                tree=None
                 continue
-            if chart.rule.head()==self.G.S:
-
-                if len(tree)>0:
-                    tree+=') '
-                    trees.append(tree)
-                    tree=''
-
             if chart.split_point>0:
                # print chart.rule
-                tree+='('+chart.rule.head()+' '
+                #tree+='('+chart.rule.head()+' '
+                if tree:
+                    old_tree=tree
+                    tree=Tree(chart.rule.head(),[])
+                    old_tree.append(tree)
+                    
+                else:
+                    #print chart
+                    tree = Tree(chart.rule.head(),[])
+                    trees.append(tree)
+                #print tree
+                #print tree
                 split_index=chart.split_point
                 b=chart.rule[0]
                 c=chart.rule[1]
+                #print b,c
                 stack.append((None,0,0))
                 stack.append((self.chartSearch(self.C[split_index,end_index],c),split_index,end_index))
                 stack.append((self.chartSearch(self.C[start_index,split_index-1],b),start_index,split_index-1))
-               
+                #print stack
 
             else:
-                tree+='('+chart.rule.head()+' '+chart.rule.production()+') '
+                tree.append(Tree(chart.rule.head(),[chart.rule.production()]))
 
-        tree+=')'
-        trees.append(tree)
+        #tree+=')'
+        #trees.append(tree)
 
         return trees
 
