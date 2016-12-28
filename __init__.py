@@ -1,3 +1,3 @@
-import cyk.Grammar
-import cyk.Rule
-import cyk.CYK
+import parserNLP.Grammar
+import parserNLP.Rule
+import parserNLP.CYK

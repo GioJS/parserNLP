@@ -60,24 +60,25 @@ class ChartMatrix:
 
 class CYK:
     
-    def __init__(self,G,s):
+    def __init__(self,G):
         '''
         Costruttore, prende in input la grammatica G, e la stringa da parsare s
         '''
-        self.s=s
+        #self.s=s
         self.G=G
         self.r=self.G.size()
-        preprop = reduce(lambda a,b: a.replace(b, ' '+b), punctuation, self.s)
+        
+
+    def parse(self, s):
+        '''
+        Metodo che implementa il parser CYK
+        '''
+        preprop = reduce(lambda a,b: a.replace(b, ' '+b), punctuation,s)
         self.tokens=preprop.split(' ')  
         self.n=len(self.tokens)
         #self.D=[]
         #definisce la struttura chart
         self.C=ChartMatrix(self.n)
-
-    def parse(self):
-        '''
-        Metodo che implementa il parser CYK
-        '''
         for i in range(self.n):
             for rule in self.G.get_unit_productions():
                 if rule.production() == self.tokens[i]:
