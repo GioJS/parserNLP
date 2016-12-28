@@ -26,7 +26,7 @@ class ChartList(list):
         self.append(Chart(rule,split_point))
     def __contains__(self,x):
         for i in self:
-            if x==i.rule:
+            if x == i.rule.head():
                 return True
         return False
     
@@ -98,13 +98,15 @@ class CYK:
                         #print rule
                         B=rule[0]
                         C=rule[1]
+                        
+                        
                         #regole di B e C
-                        rule_B=self.G.get_rules(B)
-                        rule_C=self.G.get_rules(C)
+                        #rule_B=self.G.get_rules(B)
+                        #rule_C=self.G.get_rules(C)
                         # print rule_B, rule_C
-                        for b in rule_B:
-                            for c in rule_C:
-                                if self.G[b] in self.C[j,j+k] and self.G[c] in self.C[j+k+1,j+i]:
+                        #for b in rule_B:
+                        #    for c in rule_C:
+                        if  B in self.C[j,j+k] and C in self.C[j+k+1,j+i]:
                                     self.C[j,i+j].addChart(rule,j+k+1)
 
     def chartSearch(self,chart_list,NT):
@@ -129,13 +131,14 @@ class CYK:
         while len(stack)>0:
             #print stack
             chart,start_index,end_index=stack.pop()
-            #print chart,start_index,end_index
+            print chart,start_index,end_index
             if chart == None:
-                tree=None
+                #tree=None
                 continue
             if chart.split_point>0:
                # print chart.rule
                 #tree+='('+chart.rule.head()+' '
+               # print trees
                 if tree:
                     old_tree=tree
                     tree=Tree(chart.rule.head(),[])

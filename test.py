@@ -20,15 +20,15 @@ prob=true_answer(raw_input('probabilistico? '))
 start = time.clock()
 
 
-s="a a b"
+s="she is cute"
 if not prob:
 	G=Grammar('S')
-	G.add_rules_from_file('gramm_test')
+	G.add_rules_from_file('BigGrammar')
 	#print G.get_unit_productions()
 	#s=raw_input('write a phrase: ')
 	
-	parser=CYK(G,s)
-	parser.parse()
+	parser=CYK(G)
+	parser.parse(s)
 	print parser.C
 	print parser.getTrees()
 	#print parser.derivations()
@@ -41,14 +41,14 @@ else:
 	from CYKProb import *
 	
 	G=StochasticGrammar('S')
-	G.add_rules_from_file('gramm_test')
+	G.add_rules_from_file('BigGrammar')
 	G.init_chances()
 	#print G.getKMax('VP',2)
 	#print G.grammar_chances
 	k=1
-	parser=CYKProb(G,s,k)
+	parser=CYKProb(G,k)
 
-	parser.parse()
+	parser.parse(s)
 	#print parser.P
 	#print parser.C
 	print parser.getTrees()
