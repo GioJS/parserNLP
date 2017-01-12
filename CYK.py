@@ -57,7 +57,8 @@ class ChartMatrix:
                 si+=str(self[i,j]) if self[i,j] else '\t-\t'
             s+=si+'\n'
         return s
-
+    def __len__(self):
+        return len(self.matrix)
 class CYK:
     
     def __init__(self,G):
@@ -131,7 +132,7 @@ class CYK:
         while len(stack)>0:
             #print stack
             chart,start_index,end_index=stack.pop()
-            print chart,start_index,end_index
+            #print chart,start_index,end_index
             if chart == None:
                 #tree=None
                 continue
