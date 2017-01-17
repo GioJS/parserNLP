@@ -13,7 +13,7 @@ class Chart:
     def __init__(self,rule,split_point=0):
         self.rule=rule
         self.split_point=split_point
-    
+
     def __repr__(self):
         return "("+str(self.rule)+","+str(self.split_point)+")"
 '''
@@ -29,7 +29,7 @@ class ChartList(list):
             if x == i.rule.head():
                 return True
         return False
-    
+
     def __repr__(self):
         s=''
         for i in self:
@@ -60,7 +60,7 @@ class ChartMatrix:
     def __len__(self):
         return len(self.matrix)
 class CYK:
-    
+
     def __init__(self,G):
         '''
         Costruttore, prende in input la grammatica G, e la stringa da parsare s
@@ -68,14 +68,14 @@ class CYK:
         #self.s=s
         self.G=G
         self.r=self.G.size()
-        
+
 
     def parse(self, s):
         '''
         Metodo che implementa il parser CYK
         '''
         preprop = reduce(lambda a,b: a.replace(b, ' '+b), punctuation,s)
-        self.tokens=preprop.split(' ')  
+        self.tokens=preprop.split(' ')
         self.n=len(self.tokens)
         #self.D=[]
         #definisce la struttura chart
@@ -86,7 +86,7 @@ class CYK:
                     #inizializza il primo livello
                     #print rule
                     self.C[i,i].addChart(rule,0)
-                    
+
         #print "non terminals [ok]"
         #for i=1 to n -> i=1 to n+1
         for i in range(1,self.n):
@@ -99,8 +99,8 @@ class CYK:
                         #print rule
                         B=rule[0]
                         C=rule[1]
-                        
-                        
+
+
                         #regole di B e C
                         #rule_B=self.G.get_rules(B)
                         #rule_C=self.G.get_rules(C)
@@ -115,7 +115,8 @@ class CYK:
             if chart.rule.head()==NT:
                 return chart
         return None
-    
+    def get_tree(self, A):
+        pass
     def getTrees(self):
 
         #chart delle starting rules
@@ -144,7 +145,7 @@ class CYK:
                     old_tree=tree
                     tree=Tree(chart.rule.head(),[])
                     old_tree.append(tree)
-                    
+
                 else:
                     #print chart
                     tree = Tree(chart.rule.head(),[])
@@ -167,13 +168,3 @@ class CYK:
         #trees.append(tree)
 
         return trees
-
-        
-        
-
-        
-
-
-        
-
-        
