@@ -115,9 +115,52 @@ class CYK:
             if chart.rule.head()==NT:
                 return chart
         return None
-    #TODO
+
     def get_tree(self, A):
-        pass
+        chart_list = copy.copy(A)
+        #tree_ = []
+        stack = [(chart,0,chart.split_point) for chart in chart_list]
+        tree=[]
+        while len(stack)>0:
+            #print stack
+            chart,start_index,end_index=stack.pop()
+            #print chart,start_index,end_index
+            if chart == None:
+                #tree=None
+                continue
+            if chart.split_point>0:
+               # print chart.rule
+                #tree+='('+chart.rule.head()+' '
+               # print trees
+                if tree:
+                    old_tree=tree
+                    tree=Tree(chart.rule.head(),[])
+                    old_tree.append(tree)
+
+                else:
+                    #print chart
+                    tree = Tree(chart.rule.head(),[])
+                    #tree.append(tree)
+                #print tree
+                #print tree
+
+                split_index=chart.split_point
+                b=chart.rule[0]
+                c=chart.rule[1]
+                #print b,c
+                stack.append((None,0,0))
+                stack.append((self.chartSearch(self.C[split_index,end_index],c),split_index,end_index))
+                stack.append((self.chartSearch(self.C[start_index,split_index-1],b),start_index,split_index-1))
+                #print stack
+
+            else:
+                tree.append(Tree(chart.rule.head(),[chart.rule.production()]))
+
+        #tree+=')'
+        #trees.append(tree)
+
+        return tree
+
     def getTrees(self):
 
         #chart delle starting rules
