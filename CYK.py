@@ -120,7 +120,7 @@ class CYK:
         chart_list = copy.copy(A)
         #tree_ = []
         stack = [(chart,0,chart.split_point) for chart in chart_list]
-        tree=[]
+        tree=None
         while len(stack)>0:
             #print stack
             chart,start_index,end_index=stack.pop()
@@ -154,7 +154,10 @@ class CYK:
                 #print stack
 
             else:
-                tree.append(Tree(chart.rule.head(),[chart.rule.production()]))
+                if tree:
+                    tree.append(Tree(chart.rule.head(),[Tree(chart.rule.production(),[])]))
+                else:
+                    tree = Tree(chart.rule.head(),[Tree(chart.rule.production(),[])])
 
         #tree+=')'
         #trees.append(tree)
@@ -206,7 +209,7 @@ class CYK:
                 #print stack
 
             else:
-                tree.append(Tree(chart.rule.head(),[chart.rule.production()]))
+                tree.append(Tree(chart.rule.head(),[Tree(chart.rule.production(),[])]))
 
         #tree+=')'
         #trees.append(tree)
