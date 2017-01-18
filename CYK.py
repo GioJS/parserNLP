@@ -117,9 +117,9 @@ class CYK:
         return None
 
     def get_tree(self, A):
-        chart_list = copy.copy(A)
+        chart = copy.copy(A)
         #tree_ = []
-        stack = [(chart,0,chart.split_point) for chart in chart_list]
+        stack = [(chart,0,chart.split_point)]
         tree=None
         while len(stack)>0:
             #print stack
