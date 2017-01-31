@@ -116,11 +116,19 @@ class CYK:
                 return chart
         return None
 
-    def get_tree(self, A):
-        chart = copy.copy(A)
-        #tree_ = []
-        stack = [(chart,0,chart.split_point)]
+     def get_tree(self, A):
+        #chart delle starting rules
+        chart_list=[A]
+       # print chart_list.search(chart_list[0])
+        #lista degli alberi
+        #trees=[]
+        #pila di supporto per costruire gli alberi
+        stack=[(chart,chart.split_point/2,self.n-1) for chart in chart_list]
+        #print chart_list[0]
+        #tree=''
+        #print stack
         tree=None
+        old_tree=None
         while len(stack)>0:
             #print stack
             chart,start_index,end_index=stack.pop()
@@ -132,18 +140,18 @@ class CYK:
                # print chart.rule
                 #tree+='('+chart.rule.head()+' '
                # print trees
-                if tree:
+                if not tree is None:
+                    #print tree
                     old_tree=tree
                     tree=Tree(chart.rule.head(),[])
                     old_tree.append(tree)
-
+                    #print tree
                 else:
                     #print chart
                     tree = Tree(chart.rule.head(),[])
-                    #tree.append(tree)
+                    #trees.append(tree)
                 #print tree
                 #print tree
-
                 split_index=chart.split_point
                 b=chart.rule[0]
                 c=chart.rule[1]
@@ -151,17 +159,17 @@ class CYK:
                 stack.append((None,0,0))
                 stack.append((self.chartSearch(self.C[split_index,end_index],c),split_index,end_index))
                 stack.append((self.chartSearch(self.C[start_index,split_index-1],b),start_index,split_index-1))
-                #print stack
 
             else:
-                if tree:
+                if not tree is None:
                     tree.append(Tree(chart.rule.head(),[Tree(chart.rule.production(),[])]))
                 else:
                     tree = Tree(chart.rule.head(),[Tree(chart.rule.production(),[])])
 
         #tree+=')'
         #trees.append(tree)
-
+        if not old_tree is None:
+            return old_tree
         return tree
 
     def getTrees(self):
