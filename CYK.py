@@ -116,7 +116,7 @@ class CYK:
                 return chart
         return None
 
-     def get_tree(self, A):
+    def get_tree(self, A):
         #chart delle starting rules
         chart_list=[A]
        # print chart_list.search(chart_list[0])
