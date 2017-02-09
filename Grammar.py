@@ -29,11 +29,11 @@ class Grammar:
 		'''
 		self.grammar.append(Rule(H,P,self.index))
 		if H in self.groups:
-                    self.groups[H].append(self.index)
-                else:
-                    self.groups[H]=[]
-                    self.groups[H].append(self.index)
-                self.index+=1
+			self.groups[H].append(self.index)
+		else:
+			self.groups[H]=[]
+			self.groups[H].append(self.index)
+		self.index+=1
 	
 	def add_rules_from_file(self,file):
 		'''
