@@ -3,7 +3,7 @@ Classe che rappresenta una Grammatica utilizzabile da un parser qualsiasi
 authors: Giordano Cristini, Caterina Masotti
 '''
 
-from Rule import *
+from .Rule import *
 
 class Grammar:
     
