@@ -3,9 +3,9 @@ Classe che implementa il parser CYK
 autori: Giordano Cristini, Caterina Masotti
 '''
 
-from Grammar import *
+from .Grammar import *
 import copy
-from trees import *
+from .trees import *
 from functools import reduce
 '''
 Classe che rappresenta il Chart ( regola , split point)
