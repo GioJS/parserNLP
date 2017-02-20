@@ -6,6 +6,7 @@ autori: Giordano Cristini, Caterina Masotti
 from Grammar import *
 import copy
 from trees import *
+from functools import reduce
 '''
 Classe che rappresenta il Chart ( regola , split point)
 '''

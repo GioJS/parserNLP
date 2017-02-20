@@ -7,7 +7,7 @@ import time
 
 from CYK import *
 def signal_handler(signal, frame):
-        print 'Sei uscito!'
+        print('Sei uscito!')
         sys.exit(0)
 def true_answer(ans):
     if ans.strip().lower() in ['true','1','yes','ok','sì','si','ja','da','oui']:
@@ -16,7 +16,7 @@ def true_answer(ans):
 
 signal.signal(signal.SIGINT, signal_handler)
 
-prob=true_answer(raw_input('probabilistico? '))
+prob=true_answer(input('probabilistico? '))
 start = time.clock()
 
 
@@ -29,16 +29,16 @@ if not prob:
 	
 	parser=CYK(G)
 	parser.parse(s)
-	print parser.C
-	print parser.getTrees()
+	print(parser.C)
+	print(parser.getTrees())
 	#print parser.derivations()
 	#pre-t
 	#print parser.D
 
 	#print parser.getTrees()
 else:
-	from StochasticGrammar import *
-	from CYKProb import *
+	from .StochasticGrammar import *
+	from .CYKProb import *
 	
 	G=StochasticGrammar('S')
 	G.add_rules_from_file('BigGrammar')
@@ -51,6 +51,6 @@ else:
 	parser.parse(s)
 	#print parser.P
 	#print parser.C
-	print parser.getTrees()
+	print(parser.getTrees())
 end = time.clock()
-print "%.2gs" % (end-start)
+print("%.2gs" % (end-start))

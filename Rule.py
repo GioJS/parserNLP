@@ -33,13 +33,13 @@ class Rule:
 		'''
 		Fornisce la testa della produzione
 		'''
-		return self.rule.keys()[0]
+		return list(self.rule.keys())[0]
 	
 	def production(self):
 		'''
 		Fornisce la produzione
 		'''
-		return self.rule.values()[0]
+		return list(self.rule.values())[0]
 	
 	def count(self):
 		'''

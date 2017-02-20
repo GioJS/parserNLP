@@ -3,7 +3,7 @@ Classe che rappresenta una grammatica probabilistica
 autori: Giordano Cristini, Caterina Masotti
 '''
 
-from Grammar import *
+from .Grammar import *
 import random
 import copy
 import heapq
@@ -47,7 +47,7 @@ class StochasticGrammar(Grammar):
 	def getPr(self,rule):
 		return self.grammar_chances[self[rule.index].head()][rule.index]
 	def getHeadIndex(self,H):
-		return self.groups.keys().index(H)
+		return list(self.groups.keys()).index(H)
 	# def getKMax(self,H,k):
 	# 	itemlist=[(key,v) for key,v in self.grammar_chances[H].iteritems()]
 	# 	return heapq.nlargest(k,itemlist)

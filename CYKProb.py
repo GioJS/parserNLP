@@ -1,4 +1,4 @@
-from CYK import *
+from .CYK import *
 
 class CYKProb(CYK):
 	def __init__(self,G,s,k):
@@ -36,7 +36,7 @@ class CYKProb(CYK):
 		        for k in range(0,i):
 		            for rule in self.G.get_nonunit_productions():
 		            	limit=0
-		                print rule
+		                print(rule)
 		                B=rule[0]
 		                C=rule[1]
 		                #regole di B e C
@@ -58,11 +58,11 @@ class CYKProb(CYK):
 	                			if prob>=self.P[j][j+i][self.G.getHeadIndex(rule.head())]:
 	                				limit+=1
 	                				#print limit,prob,rule
-	                				print t1
-	                				print t2
-	                				print self.G.getPr(rule)
-	                				print prob
-	                				print self.P[j][j+i][self.G.getHeadIndex(rule.head())]
+	                				print(t1)
+	                				print(t2)
+	                				print(self.G.getPr(rule))
+	                				print(prob)
+	                				print(self.P[j][j+i][self.G.getHeadIndex(rule.head())])
 	                				self.P[j][j+i][self.G.getHeadIndex(rule.head())]=prob
 	                				if len(self.C[j,i+j])>0:
 	                					self.C[j,i+j].pop()
