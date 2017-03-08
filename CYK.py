@@ -124,7 +124,7 @@ class CYK:
         #lista degli alberi
         #trees=[]
         #pila di supporto per costruire gli alberi
-        stack=[(chart,chart.split_point/2,self.n-1) for chart in chart_list]
+        stack=[(chart,chart.split_point//2,self.n-1) for chart in chart_list]
         #print chart_list[0]
         #tree=''
         #print stack

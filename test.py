@@ -26,7 +26,7 @@ if not prob:
 	G.add_rules_from_file('BigGrammar')
 	#print G.get_unit_productions()
 	#s=raw_input('write a phrase: ')
-	
+
 	parser=CYK(G)
 	parser.parse(s)
 	print(parser.C)
@@ -39,7 +39,7 @@ if not prob:
 else:
 	from .StochasticGrammar import *
 	from .CYKProb import *
-	
+
 	G=StochasticGrammar('S')
 	G.add_rules_from_file('BigGrammar')
 	G.init_chances()
