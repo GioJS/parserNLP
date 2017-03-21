@@ -48,8 +48,11 @@ class ChartMatrix:
                 self.matrix[i].append(ChartList())
     #chartmatrix[i,j]
     def __getitem__(self,pos):
-        x,y=pos
-        return self.matrix[x][y]
+        if type(pos) == tuple:
+            x,y=pos
+            return self.matrix[x][y]
+        else:
+            return self.matrix[pos]
     def __repr__(self):
         s=''
         for i in range(len(self.matrix)):
