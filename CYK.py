@@ -78,8 +78,8 @@ class CYK:
         '''
         Metodo che implementa il parser CYK
         '''
-        preprop = reduce(lambda a,b: a.replace(b, ' '+b), punctuation,s)
-        self.tokens=preprop.split(' ')
+        #preprop = reduce(lambda a,b: a.replace(b, ' '+b), punctuation,s)
+        self.tokens=s.split(' ')
         self.n=len(self.tokens)
         #self.D=[]
         #definisce la struttura chart
